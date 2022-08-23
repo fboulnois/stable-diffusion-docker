@@ -1,6 +1,7 @@
 FROM tensorflow/tensorflow:latest-gpu
 
-RUN pip install diffusers pillow torch transformers --extra-index-url https://download.pytorch.org/whl/cu116
+RUN pip install diffusers pillow torch transformers \
+  --extra-index-url https://download.pytorch.org/whl/cu116
 
 RUN useradd -m huggingface
 
