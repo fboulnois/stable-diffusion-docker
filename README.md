@@ -34,7 +34,7 @@ Make sure your [user access token](#before-you-start) is saved in a file called
 To build:
 
 ```sh
-./build.sh build # or just ./build.sh
+./build.sh build  # or just ./build.sh
 ```
 
 ## Run
