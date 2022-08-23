@@ -43,7 +43,7 @@ To build:
 ./build.sh run 'A high tech solarpunk utopia in the Amazon rainforest'
 ```
 
-## Outputs
+## Images
 
 The model and other files are cached in a volume called `huggingface`.
 
