@@ -40,11 +40,9 @@ def stable_diffusion(prompt):
 
     print("loaded images after:", isodatetime())
 
-    i = 1
-    for image in images["sample"]:
+    for i, image in enumerate(images["sample"]):
         iname = prompt[0].replace(" ", "_")
-        image.save("output/%s__steps_%d__scale_%d__seed_%d__n_%d.png" % (iname, steps, scale, seed, i))
-        i = i + 1
+        image.save("output/%s__steps_%d__scale_%d__seed_%d__n_%d.png" % (iname, steps, scale, seed, i + 1))
 
     print("completed pipeline:", isodatetime(), flush=True)
 
