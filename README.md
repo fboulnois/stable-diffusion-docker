@@ -14,9 +14,8 @@ container.
 ## Before you start
 
 The pipeline uses the full model and weights which requires 8GB+ of GPU RAM.
-You may need to turn down the number of samples or other parameters which are
-currently hardcoded on smaller GPUs. It should take a few seconds to create
-one image.
+On smaller GPUs, you may need to modify some of the hardcoded parameters. It
+should take a few seconds to create one image.
 
 Since it uses the official model, you will need to create a [user access token](https://huggingface.co/docs/hub/security-tokens)
 in your [Huggingface account](https://huggingface.co/settings/tokens). Save the
