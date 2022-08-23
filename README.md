@@ -43,9 +43,13 @@ To build:
 ./build.sh run 'A high tech solarpunk utopia in the Amazon rainforest'
 ```
 
-## Images
+## Outputs
+
+### Model
 
 The model and other files are cached in a volume called `huggingface`.
 
-The `build.sh` script creates and mounts an `output` folder as a volume in the
-container. The images are saved as PNGs to that folder using the prompt text.
+### Images
+
+The images are saved as PNGs in the `output` folder using the prompt text. The
+`build.sh` script creates and mounts this folder as a volume in the container.
