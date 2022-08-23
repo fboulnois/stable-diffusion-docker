@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import datetime, sys, time
+import datetime, random, sys, time
 import torch
 from torch import autocast
 from diffusers import StableDiffusionPipeline
@@ -28,7 +28,8 @@ def stable_diffusion(prompt):
     samples = 1
     steps = 40
     scale = 7
-    generator = torch.Generator(device=device).manual_seed(42)
+    seed = random.randint(1, 2**31)
+    generator = torch.Generator(device=device).manual_seed(seed)
     with autocast(device):
         images = pipe(
             prompt * samples,
@@ -42,7 +43,7 @@ def stable_diffusion(prompt):
     i = 1
     for image in images["sample"]:
         iname = prompt[0].replace(" ", "_")
-        image.save("output/%s_%d.png" % (iname, i))
+        image.save("output/%s__steps_%d__scale_%d__seed_%d__n_%d.png" % (iname, steps, scale, seed, i))
         i = i + 1
 
     print("completed pipeline:", isodatetime(), flush=True)
