@@ -24,7 +24,7 @@ when building the container.
 
 ## Quickstart
 
-The model is managed using a single [`build.sh`](build.sh) script.
+The pipeline is managed using a single [`build.sh`](build.sh) script.
 
 ## Build
 
@@ -38,6 +38,8 @@ To build:
 ```
 
 ## Run
+
+To run:
 
 ```sh
 ./build.sh run 'A high tech solarpunk utopia in the Amazon rainforest'
