@@ -45,6 +45,40 @@ To run:
 ./build.sh run 'A high tech solarpunk utopia in the Amazon rainforest'
 ```
 
+### Additional options
+
+Some of the options from [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
+are also implemented for compatibility:
+
+* `--prompt [PROMPT]`: the prompt to render into an image
+* `--n_samples [N_SAMPLES]`: number of images to create (default 1)
+* `--H [H]`: image height in pixels (default 512)
+* `--W [W]`: image width in pixels (default 512)
+* `--scale [SCALE]`: unconditional guidance scale (default 7.5)
+* `--seed [SEED]`: RNG seed for repeatability (default is a random seed)
+* `--ddim_steps [DDIM_STEPS]`: number of sampling steps (default 50)
+
+### Additional examples
+
+These commands are both identical:
+
+```sh
+./build.sh run 'abtract art'
+./build.sh run --prompt 'abtract art'
+```
+
+Set the seed to 42:
+
+```sh
+./build.sh run --seed 42 'abtract art'
+```
+
+Options can be combined:
+
+```sh
+./build.sh run --scale 7.0 --seed 42 'abtract art'
+```
+
 ## Outputs
 
 ### Model
