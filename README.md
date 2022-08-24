@@ -63,20 +63,20 @@ are also implemented for compatibility:
 These commands are both identical:
 
 ```sh
-./build.sh run 'abtract art'
-./build.sh run --prompt 'abtract art'
+./build.sh run 'abstract art'
+./build.sh run --prompt 'abstract art'
 ```
 
 Set the seed to 42:
 
 ```sh
-./build.sh run --seed 42 'abtract art'
+./build.sh run --seed 42 'abstract art'
 ```
 
 Options can be combined:
 
 ```sh
-./build.sh run --scale 7.0 --seed 42 'abtract art'
+./build.sh run --scale 7.0 --seed 42 'abstract art'
 ```
 
 ## Outputs
