@@ -3,7 +3,6 @@ import datetime, random, sys, time
 import torch
 from torch import autocast
 from diffusers import StableDiffusionPipeline
-from PIL import Image
 
 
 def isodatetime():
