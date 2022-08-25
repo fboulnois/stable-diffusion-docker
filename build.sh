@@ -5,7 +5,7 @@ set -eu
 CWD=$(basename "$PWD")
 
 build() {
-    docker build . --tag $CWD
+    docker build . --tag "$CWD"
 }
 
 clean() {
@@ -16,8 +16,8 @@ dev() {
     mkdir -p output
     docker run --rm --gpus=all --entrypoint=sh \
         -v huggingface:/home/huggingface/.cache/huggingface \
-        -v $PWD/output:/home/huggingface/output \
-        -it $CWD
+        -v "$PWD"/output:/home/huggingface/output \
+        -it "$CWD"
 }
 
 run() {
@@ -25,8 +25,8 @@ run() {
     mkdir -p output
     docker run --rm --gpus=all \
         -v huggingface:/home/huggingface/.cache/huggingface \
-        -v $PWD/output:/home/huggingface/output \
-        $CWD "$@"
+        -v "$PWD"/output:/home/huggingface/output \
+        "$CWD" "$@"
 }
 
 case ${1:-build} in
