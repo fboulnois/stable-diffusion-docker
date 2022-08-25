@@ -45,7 +45,7 @@ To run:
 ./build.sh run 'A high tech solarpunk utopia in the Amazon rainforest'
 ```
 
-### Additional options
+### Options
 
 Some of the options from [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
 are also implemented for compatibility:
@@ -58,7 +58,7 @@ are also implemented for compatibility:
 * `--seed [SEED]`: RNG seed for repeatability (default is a random seed)
 * `--ddim_steps [DDIM_STEPS]`: number of sampling steps (default 50)
 
-### Additional examples
+### Examples
 
 These commands are both identical:
 
