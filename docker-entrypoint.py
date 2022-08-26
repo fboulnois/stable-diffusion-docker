@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import argparse, datetime, random, sys, time
+import argparse, datetime, random, time
 import torch
 from torch import autocast
 from diffusers import StableDiffusionPipeline
