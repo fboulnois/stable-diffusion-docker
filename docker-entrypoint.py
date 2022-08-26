@@ -9,18 +9,20 @@ def isodatetime():
     return datetime.datetime.now().isoformat()
 
 
-def stable_diffusion(prompt, samples, height, width, steps, scale, seed):
+def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half):
     model_name = "CompVis/stable-diffusion-v1-4"
     device = "cuda"
+
+    dtype, rev = (torch.float16, "fp16") if half else (torch.float32, "main")
 
     print("load pipeline start:", isodatetime())
 
     with open("token.txt") as f:
         token = f.read().replace("\n", "")
 
-    pipe = StableDiffusionPipeline.from_pretrained(model_name, use_auth_token=token).to(
-        device
-    )
+    pipe = StableDiffusionPipeline.from_pretrained(
+        model_name, torch_dtype=dtype, revision=rev, use_auth_token=token
+    ).to(device)
 
     print("loaded models after:", isodatetime())
 
@@ -81,6 +83,14 @@ def main():
     parser.add_argument(
         "--ddim_steps", type=int, nargs="?", default=50, help="Number of sampling steps"
     )
+    parser.add_argument(
+        "--half",
+        type=bool,
+        nargs="?",
+        const=True,
+        default=False,
+        help="Use float16 (half-sized) tensors instead of float32",
+    )
 
     args = parser.parse_args()
 
@@ -98,6 +108,7 @@ def main():
         args.ddim_steps,
         args.scale,
         args.seed,
+        args.half,
     )
 
 
