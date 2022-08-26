@@ -24,7 +24,8 @@ when building the container.
 
 ## Quickstart
 
-The pipeline is managed using a single [`build.sh`](build.sh) script.
+The pipeline is managed using a single [`build.sh`](build.sh) script. You must
+build the image before it can be run.
 
 ## Build
 
