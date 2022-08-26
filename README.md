@@ -49,7 +49,7 @@ To run:
 ### Options
 
 Some of the options from [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
-are also implemented for compatibility:
+are implemented for compatibility:
 
 * `--prompt [PROMPT]`: the prompt to render into an image
 * `--n_samples [N_SAMPLES]`: number of images to create (default 1)
@@ -58,6 +58,10 @@ are also implemented for compatibility:
 * `--scale [SCALE]`: unconditional guidance scale (default 7.5)
 * `--seed [SEED]`: RNG seed for repeatability (default is a random seed)
 * `--ddim_steps [DDIM_STEPS]`: number of sampling steps (default 50)
+
+Other options:
+
+* `--half`: use float16 tensors instead of float32 (default float32)
 
 ### Examples
 
