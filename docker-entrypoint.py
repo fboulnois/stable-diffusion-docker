@@ -75,7 +75,7 @@ def main():
         type=float,
         nargs="?",
         default=7.5,
-        help="Unconditional guidance scale",
+        help="Classifier free guidance scale",
     )
     parser.add_argument(
         "--seed", type=int, nargs="?", default=0, help="RNG seed for repeatability"
