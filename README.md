@@ -84,6 +84,13 @@ Options can be combined:
 ./build.sh run --scale 7.0 --seed 42 'abstract art'
 ```
 
+On Windows, if you aren't using WSL2 and instead use MSYS, MinGW, or Git Bash,
+prefix your commands with `MSYS_NO_PATHCONV=1` (or export it beforehand):
+
+```sh
+MSYS_NO_PATHCONV=1 ./build.sh run --half 'abstract art'
+```
+
 ## Outputs
 
 ### Model
