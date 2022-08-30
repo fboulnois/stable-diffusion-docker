@@ -98,7 +98,7 @@ def main():
         args.prompt = args.prompt0
 
     if args.seed == 0:
-        args.seed = random.randint(1, 2**31)
+        args.seed = torch.random.seed()
 
     stable_diffusion(
         args.prompt,
