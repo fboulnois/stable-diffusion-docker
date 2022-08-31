@@ -5,7 +5,7 @@ from torch import autocast
 from diffusers import StableDiffusionPipeline
 
 
-def isodatetime():
+def iso_date_time():
     return datetime.datetime.now().isoformat()
 
 
@@ -15,7 +15,7 @@ def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half):
 
     dtype, rev = (torch.float16, "fp16") if half else (torch.float32, "main")
 
-    print("load pipeline start:", isodatetime())
+    print("load pipeline start:", iso_date_time())
 
     with open("token.txt") as f:
         token = f.read().replace("\n", "")
@@ -24,7 +24,7 @@ def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half):
         model_name, torch_dtype=dtype, revision=rev, use_auth_token=token
     ).to(device)
 
-    print("loaded models after:", isodatetime())
+    print("loaded models after:", iso_date_time())
 
     generator = torch.Generator(device=device).manual_seed(seed)
     with autocast(device):
@@ -37,7 +37,7 @@ def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half):
             generator=generator,
         )
 
-    print("loaded images after:", isodatetime())
+    print("loaded images after:", iso_date_time())
 
     for i, image in enumerate(images["sample"]):
         iname = prompt.replace(" ", "_")
@@ -46,7 +46,7 @@ def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half):
             % (iname, steps, scale, seed, i + 1)
         )
 
-    print("completed pipeline:", isodatetime(), flush=True)
+    print("completed pipeline:", iso_date_time(), flush=True)
 
 
 def main():
