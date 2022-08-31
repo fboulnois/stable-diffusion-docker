@@ -62,6 +62,7 @@ are implemented for compatibility:
 Other options:
 
 * `--half`: use float16 tensors instead of float32 (default float32)
+* `--skip`: skip safety checker
 
 ### Examples
 
