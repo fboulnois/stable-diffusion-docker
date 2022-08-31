@@ -9,7 +9,11 @@ def iso_date_time():
     return datetime.datetime.now().isoformat()
 
 
-def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half):
+def skip_safety_checker(images, *args, **kwargs):
+    return images, False
+
+
+def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half, skip):
     model_name = "CompVis/stable-diffusion-v1-4"
     device = "cuda"
 
@@ -23,6 +27,9 @@ def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half):
     pipe = StableDiffusionPipeline.from_pretrained(
         model_name, torch_dtype=dtype, revision=rev, use_auth_token=token
     ).to(device)
+
+    if skip:
+        pipe.safety_checker = skip_safety_checker
 
     print("loaded models after:", iso_date_time())
 
@@ -91,6 +98,14 @@ def main():
         default=False,
         help="Use float16 (half-sized) tensors instead of float32",
     )
+    parser.add_argument(
+        "--skip",
+        type=bool,
+        nargs="?",
+        const=True,
+        default=False,
+        help="Skip the safety checker",
+    )
 
     args = parser.parse_args()
 
@@ -109,6 +124,7 @@ def main():
         args.scale,
         args.seed,
         args.half,
+        args.skip,
     )
 
 
