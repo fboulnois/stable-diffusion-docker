@@ -40,7 +40,7 @@ def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half):
     print("loaded images after:", iso_date_time())
 
     for i, image in enumerate(images["sample"]):
-        iname = prompt.replace(" ", "_")
+        iname = prompt.replace(" ", "_")[:170]
         image.save(
             "output/%s__steps_%d__scale_%0.2f__seed_%d__n_%d.png"
             % (iname, steps, scale, seed, i + 1)
