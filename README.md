@@ -52,7 +52,8 @@ Some of the options from [`txt2img.py`](https://github.com/CompVis/stable-diffus
 are implemented for compatibility:
 
 * `--prompt [PROMPT]`: the prompt to render into an image
-* `--n_samples [N_SAMPLES]`: number of images to create (default 1)
+* `--n_samples [N_SAMPLES]`: number of images to create per run (default 1)
+* `--n_iter [N_ITER]`: number of times to run pipeline (default 1)
 * `--H [H]`: image height in pixels (default 512)
 * `--W [W]`: image width in pixels (default 512)
 * `--scale [SCALE]`: unconditional guidance scale (default 7.5)
