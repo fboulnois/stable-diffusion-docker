@@ -13,7 +13,9 @@ def skip_safety_checker(images, *args, **kwargs):
     return images, False
 
 
-def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half, skip):
+def stable_diffusion(
+    prompt, samples, iters, height, width, steps, scale, seed, half, skip
+):
     model_name = "CompVis/stable-diffusion-v1-4"
     device = "cuda"
 
@@ -33,25 +35,25 @@ def stable_diffusion(prompt, samples, height, width, steps, scale, seed, half, s
 
     print("loaded models after:", iso_date_time())
 
+    prefix = prompt.replace(" ", "_")[:170]
+
     generator = torch.Generator(device=device).manual_seed(seed)
-    with autocast(device):
-        images = pipe(
-            [prompt] * samples,
-            height=height,
-            width=width,
-            num_inference_steps=steps,
-            guidance_scale=scale,
-            generator=generator,
-        )
+    for j in range(iters):
+        with autocast(device):
+            images = pipe(
+                [prompt] * samples,
+                height=height,
+                width=width,
+                num_inference_steps=steps,
+                guidance_scale=scale,
+                generator=generator,
+            )
 
-    print("loaded images after:", iso_date_time())
-
-    iname = prompt.replace(" ", "_")[:170]
-    for i, image in enumerate(images["sample"]):
-        image.save(
-            "output/%s__steps_%d__scale_%0.2f__seed_%d__n_%d.png"
-            % (iname, steps, scale, seed, i + 1)
-        )
+        for i, image in enumerate(images["sample"]):
+            image.save(
+                "output/%s__steps_%d__scale_%0.2f__seed_%d__n_%d.png"
+                % (prefix, steps, scale, seed, j * samples + i + 1)
+            )
 
     print("completed pipeline:", iso_date_time(), flush=True)
 
@@ -69,7 +71,18 @@ def main():
         "--prompt", type=str, nargs="?", help="The prompt to render into an image"
     )
     parser.add_argument(
-        "--n_samples", type=int, nargs="?", default=1, help="Number of images to create"
+        "--n_samples",
+        type=int,
+        nargs="?",
+        default=1,
+        help="Number of images to create per run",
+    )
+    parser.add_argument(
+        "--n_iter",
+        type=int,
+        nargs="?",
+        default=1,
+        help="Number of times to run pipeline",
     )
     parser.add_argument(
         "--H", type=int, nargs="?", default=512, help="Image height in pixels"
@@ -118,6 +131,7 @@ def main():
     stable_diffusion(
         args.prompt,
         args.n_samples,
+        args.n_iter,
         args.H,
         args.W,
         args.ddim_steps,
