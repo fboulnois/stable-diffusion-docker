@@ -14,7 +14,7 @@ def skip_safety_checker(images, *args, **kwargs):
 
 
 def stable_diffusion(
-    prompt, samples, iters, height, width, steps, scale, seed, half, skip
+    prompt, samples, iters, height, width, steps, scale, seed, half, skip, token
 ):
     model_name = "CompVis/stable-diffusion-v1-4"
     device = "cuda"
@@ -22,9 +22,6 @@ def stable_diffusion(
     dtype, rev = (torch.float16, "fp16") if half else (torch.float32, "main")
 
     print("load pipeline start:", iso_date_time())
-
-    with open("token.txt") as f:
-        token = f.read().replace("\n", "")
 
     pipe = StableDiffusionPipeline.from_pretrained(
         model_name, torch_dtype=dtype, revision=rev, use_auth_token=token
@@ -119,6 +116,9 @@ def main():
         default=False,
         help="Skip the safety checker",
     )
+    parser.add_argument(
+        "--token", type=str, nargs="?", help="Huggingface user access token"
+    )
 
     args = parser.parse_args()
 
@@ -127,6 +127,10 @@ def main():
 
     if args.seed == 0:
         args.seed = torch.random.seed()
+
+    if args.token is None:
+        with open("token.txt") as f:
+            args.token = f.read().replace("\n", "")
 
     stable_diffusion(
         args.prompt,
@@ -139,6 +143,7 @@ def main():
         args.seed,
         args.half,
         args.skip,
+        args.token,
     )
 
 
