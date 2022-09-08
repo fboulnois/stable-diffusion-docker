@@ -64,6 +64,8 @@ Other options:
 
 * `--half`: use float16 tensors instead of float32 (default float32)
 * `--skip`: skip safety checker
+* `--token [TOKEN]`: specify a Huggingface user access token at the command line
+instead of reading it from a file
 
 ### Examples
 
