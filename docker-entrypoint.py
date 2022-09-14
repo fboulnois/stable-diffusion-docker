@@ -14,7 +14,18 @@ def skip_safety_checker(images, *args, **kwargs):
 
 
 def stable_diffusion(
-    prompt, samples, iters, height, width, steps, scale, seed, half, skip, token
+    prompt,
+    samples,
+    iters,
+    height,
+    width,
+    steps,
+    scale,
+    seed,
+    half,
+    skip,
+    do_slice,
+    token,
 ):
     model_name = "CompVis/stable-diffusion-v1-4"
     device = "cuda"
@@ -29,6 +40,9 @@ def stable_diffusion(
 
     if skip:
         pipe.safety_checker = skip_safety_checker
+
+    if do_slice:
+        pipe.enable_attention_slicing()
 
     print("loaded models after:", iso_date_time())
 
@@ -101,6 +115,14 @@ def main():
         "--ddim_steps", type=int, nargs="?", default=50, help="Number of sampling steps"
     )
     parser.add_argument(
+        "--attention-slicing",
+        type=bool,
+        nargs="?",
+        const=True,
+        default=False,
+        help="Use less memory at the expense of inference speed",
+    )
+    parser.add_argument(
         "--half",
         type=bool,
         nargs="?",
@@ -143,6 +165,7 @@ def main():
         args.seed,
         args.half,
         args.skip,
+        args.attention_slicing,
         args.token,
     )
 
