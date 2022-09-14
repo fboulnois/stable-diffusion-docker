@@ -62,6 +62,7 @@ are implemented for compatibility:
 
 Other options:
 
+* `--attention-slicing`: use less memory at the expense of inference speed
 * `--half`: use float16 tensors instead of float32 (default float32)
 * `--skip`: skip safety checker
 * `--token [TOKEN]`: specify a Huggingface user access token at the command line
