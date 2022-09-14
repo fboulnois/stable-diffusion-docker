@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:latest-gpu
+FROM tensorflow/tensorflow:2.10.0-gpu
 
 RUN pip install diffusers pillow torch transformers \
   --extra-index-url https://download.pytorch.org/whl/cu116
