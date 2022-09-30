@@ -107,3 +107,11 @@ The model and other files are cached in a volume called `huggingface`.
 
 The images are saved as PNGs in the `output` folder using the prompt text. The
 `build.sh` script creates and mounts this folder as a volume in the container.
+
+## FAQ
+
+### What settings can change if I don't have 12GB+ of VRAM?
+
+* Make images smaller than 512x512 using --W and --H
+* Use --half to use smaller floats
+* Use the recently added --attention-slicing to decrease memory usage (but which also decreases speed)
