@@ -13,9 +13,10 @@ container.
 
 ## Before you start
 
-The pipeline uses the full model and weights which requires 8GB+ of GPU RAM.
-On smaller GPUs you may need to modify some of the parameters. It should take a
-few seconds to create one image.
+The pipeline uses the full model and weights which requires 8GB+ of GPU RAM. It
+should take a few seconds to create one image. On smaller GPUs you may need to
+modify some of the parameters, see the [Examples](#examples) section for more
+details.
 
 Since it uses the official model, you will need to create a [user access token](https://huggingface.co/docs/hub/security-tokens)
 in your [Huggingface account](https://huggingface.co/settings/tokens). Save the
@@ -88,6 +89,17 @@ Options can be combined:
 
 ```sh
 ./build.sh run --scale 7.0 --seed 42 'abstract art'
+```
+
+On systems with <8GB of GPU RAM, you can try mixing and matching options:
+
+* Make images smaller than 512x512 using `--W` and `--H`
+* Use `--half` to decrease memory use but slightly decrease image quality
+* Use `--attention-slicing` to decrease memory use but decrease image speed
+* Skip the safety checker with `--skip` to run less code
+
+```sh
+./build.sh run --W 256 --H 256 --half --attention-slicing --skip --prompt 'abstract art'
 ```
 
 On Windows, if you aren't using WSL2 and instead use MSYS, MinGW, or Git Bash,
