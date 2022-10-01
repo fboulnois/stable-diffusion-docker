@@ -55,8 +55,8 @@ are implemented for compatibility:
 * `--prompt [PROMPT]`: the prompt to render into an image
 * `--n_samples [N_SAMPLES]`: number of images to create per run (default 1)
 * `--n_iter [N_ITER]`: number of times to run pipeline (default 1)
-* `--H [H]`: image height in pixels (default 512)
-* `--W [W]`: image width in pixels (default 512)
+* `--H [H]`: image height in pixels (default 512, must be divisible by 64)
+* `--W [W]`: image width in pixels (default 512, must be divisible by 64)
 * `--scale [SCALE]`: unconditional guidance scale (default 7.5)
 * `--seed [SEED]`: RNG seed for repeatability (default is a random seed)
 * `--ddim_steps [DDIM_STEPS]`: number of sampling steps (default 50)
@@ -93,9 +93,11 @@ Options can be combined:
 
 On systems with <8GB of GPU RAM, you can try mixing and matching options:
 
-* Make images smaller than 512x512 using `--W` and `--H`
+* Make images smaller than 512x512 using `--W` and `--H` to decrease memory use
+and increase image creation speed
 * Use `--half` to decrease memory use but slightly decrease image quality
-* Use `--attention-slicing` to decrease memory use but decrease image speed
+* Use `--attention-slicing` to decrease memory use but also decrease image
+creation speed
 * Skip the safety checker with `--skip` to run less code
 
 ```sh
