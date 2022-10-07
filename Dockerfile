@@ -1,6 +1,8 @@
 FROM tensorflow/tensorflow:2.10.0-gpu
 
-RUN pip install diffusers pillow torch transformers \
+COPY requirements.txt /
+
+RUN pip install -r requirements.txt \
   --extra-index-url https://download.pytorch.org/whl/cu116
 
 RUN useradd -m huggingface
