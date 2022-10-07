@@ -1,91 +1,98 @@
 # Changelog
 
+## [v1.7.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.6.0...v1.7.0) - 2022-10-07
+
+### Added
+
+* Upgrade to diffusers 0.4.1
+* Pin dependencies using requirements.txt
+
 ## [v1.6.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.5.0...v1.6.0) - 2022-09-14
 
 ### Added
 
-* add attention slicing
+* Add attention slicing
 
 ### Changed
 
-* use tagged version of tensorflow
+* Use tagged version of tensorflow
 
 ## [v1.5.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.4.0...v1.5.0) - 2022-09-08
 
 ### Added
 
-* specify user access token at command line
+* Specify user access token at command line
 
 ## [v1.4.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.3.0...v1.4.0) - 2022-09-05
 
 ### Added
 
-* add pipeline iteration
+* Add pipeline iteration
 
 ### Changed
 
-* move image name out of loop
+* Move image name out of loop
 
 ## [v1.3.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.2.2...v1.3.0) - 2022-09-02
 
 ### Added
 
-* support skipping safety checker
+* Support skipping safety checker
 
 ## [v1.2.2](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.2.1...v1.2.2) - 2022-09-01
 
 ### Changed
 
-* rename iso date time function
+* Rename iso date time function
 
 ### Fixed
 
-* prevent errors when file name is too long
+* Prevent errors when file name is too long
 
 ## [v1.2.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.2.0...v1.2.1) - 2022-08-29
 
 ### Fixed
 
-* allow full range of random seeds
+* Allow full range of random seeds
 
 ## [v1.2.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.1.1...v1.2.0) - 2022-08-26
 
 ### Added
 
-* support half-sized (float16) tensors
+* Support half-sized (float16) tensors
 
 ### Changed
 
-* update scale argument description
+* Update scale argument description
 
 ### Fixed
 
-* remove unused sys import
+* Remove unused sys import
 
 ## [v1.1.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.1.0...v1.1.1) - 2022-08-25
 
 ### Fixed
 
-* double quote to prevent globbing
-* only output two digits of precision
+* Double quote to prevent globbing
+* Only output two digits of precision
 
 ## [v1.1.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.0.0...v1.1.0) - 2022-08-24
 
 ### Added
 
-* add a subset of txt2img.py options
-* include model params in image filename
+* Add a subset of txt2img.py options
+* Include model params in image filename
 
 ### Changed
 
-* use enumerate instead of index
+* Use enumerate instead of index
 
 ### Fixed
 
-* remove unnecessary image library import
+* Remove unnecessary image library import
 
 ## [v1.0.0](https://github.com/fboulnois/stable-diffusion-docker/releases/tag/v1.0.0) - 2022-08-22
 
 ### Added
 
-* initial release
+* Initial release
