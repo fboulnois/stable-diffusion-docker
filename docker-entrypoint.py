@@ -42,7 +42,7 @@ def stable_diffusion_pipeline(model, half, skip, do_slice, token):
 
 
 def stable_diffusion_inference(
-    pipeline, prompt, samples, iters, height, width, steps, scale, seed
+    pipeline, prompt, neg_prompt, samples, iters, height, width, steps, scale, seed
 ):
     if seed == 0:
         seed = torch.random.seed()
@@ -54,6 +54,7 @@ def stable_diffusion_inference(
         with autocast(cuda_device()):
             result = pipeline(
                 prompt,
+                negative_prompt=neg_prompt,
                 height=height,
                 width=width,
                 num_images_per_prompt=samples,
@@ -140,6 +141,12 @@ def main():
         help="The model used to render images",
     )
     parser.add_argument(
+        "--negative-prompt",
+        type=str,
+        nargs="?",
+        help="The prompt to not render into an image",
+    )
+    parser.add_argument(
         "--skip",
         type=bool,
         nargs="?",
@@ -163,6 +170,7 @@ def main():
     stable_diffusion_inference(
         pipeline,
         args.prompt,
+        args.negative_prompt,
         args.n_samples,
         args.n_iter,
         args.H,
