@@ -1,5 +1,7 @@
 FROM tensorflow/tensorflow:2.10.0-gpu
 
+RUN rm -rf /usr/local/cuda/lib64/stubs
+
 COPY requirements.txt /
 
 RUN pip install -r requirements.txt \
