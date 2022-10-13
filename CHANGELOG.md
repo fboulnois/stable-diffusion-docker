@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.8.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.8.0...v1.8.1) - 2022-10-13
+
+### Fixed
+
+* Remove cuda stubs to prevent errors
+
 ## [v1.8.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.7.0...v1.8.0) - 2022-10-12
 
 ### Added
