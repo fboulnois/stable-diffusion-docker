@@ -51,7 +51,7 @@ def stable_diffusion(
     generator = torch.Generator(device=device).manual_seed(seed)
     for j in range(iters):
         with autocast(device):
-            images = pipe(
+            result = pipe(
                 [prompt] * samples,
                 height=height,
                 width=width,
@@ -60,7 +60,7 @@ def stable_diffusion(
                 generator=generator,
             )
 
-        for i, image in enumerate(images["sample"]):
+        for i, image in enumerate(result.images):
             image.save(
                 "output/%s__steps_%d__scale_%0.2f__seed_%d__n_%d.png"
                 % (prefix, steps, scale, seed, j * samples + i + 1)
