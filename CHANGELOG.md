@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.10.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.9.0...v1.10.0) - 2022-10-19
+
+### Added
+
+* Upgrade to diffusers 0.6.0
+
+### Fixed
+
+* Switch output and image names
+
 ## [v1.9.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.8.1...v1.9.0) - 2022-10-14
 
 ### Added
