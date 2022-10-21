@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.11.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.10.0...v1.11.0) - 2022-10-21
+
+### Added
+
+* Make model configurable
+
 ## [v1.10.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.9.0...v1.10.0) - 2022-10-19
 
 ### Added
