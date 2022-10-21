@@ -14,6 +14,7 @@ def skip_safety_checker(images, *args, **kwargs):
 
 
 def stable_diffusion(
+    model,
     prompt,
     samples,
     iters,
@@ -27,7 +28,6 @@ def stable_diffusion(
     do_slice,
     token,
 ):
-    model_name = "CompVis/stable-diffusion-v1-4"
     device = "cuda"
 
     dtype, rev = (torch.float16, "fp16") if half else (torch.float32, "main")
@@ -35,7 +35,7 @@ def stable_diffusion(
     print("load pipeline start:", iso_date_time())
 
     pipe = StableDiffusionPipeline.from_pretrained(
-        model_name, torch_dtype=dtype, revision=rev, use_auth_token=token
+        model, torch_dtype=dtype, revision=rev, use_auth_token=token
     ).to(device)
 
     if skip:
@@ -131,6 +131,13 @@ def main():
         help="Use float16 (half-sized) tensors instead of float32",
     )
     parser.add_argument(
+        "--model",
+        type=str,
+        nargs="?",
+        default="CompVis/stable-diffusion-v1-4",
+        help="The model used to render images",
+    )
+    parser.add_argument(
         "--skip",
         type=bool,
         nargs="?",
@@ -155,6 +162,7 @@ def main():
             args.token = f.read().replace("\n", "")
 
     stable_diffusion(
+        args.model,
         args.prompt,
         args.n_samples,
         args.n_iter,
