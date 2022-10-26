@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.11.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.11.0...v1.11.1) - 2022-10-26
+
+### Changed
+
+* Split pipeline and inference
+
 ## [v1.11.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.10.0...v1.11.0) - 2022-10-21
 
 ### Added
