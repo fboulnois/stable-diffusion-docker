@@ -5,6 +5,10 @@ from torch import autocast
 from diffusers import StableDiffusionPipeline
 
 
+def cuda_device():
+    return "cuda"
+
+
 def iso_date_time():
     return datetime.datetime.now().isoformat()
 
@@ -13,45 +17,42 @@ def skip_safety_checker(images, *args, **kwargs):
     return images, False
 
 
-def stable_diffusion(
-    model,
-    prompt,
-    samples,
-    iters,
-    height,
-    width,
-    steps,
-    scale,
-    seed,
-    half,
-    skip,
-    do_slice,
-    token,
-):
-    device = "cuda"
+def stable_diffusion_pipeline(model, half, skip, do_slice, token):
+    if token is None:
+        with open("token.txt") as f:
+            token = f.read().replace("\n", "")
 
     dtype, rev = (torch.float16, "fp16") if half else (torch.float32, "main")
 
     print("load pipeline start:", iso_date_time())
 
-    pipe = StableDiffusionPipeline.from_pretrained(
+    pipeline = StableDiffusionPipeline.from_pretrained(
         model, torch_dtype=dtype, revision=rev, use_auth_token=token
-    ).to(device)
+    ).to(cuda_device())
 
     if skip:
-        pipe.safety_checker = skip_safety_checker
+        pipeline.safety_checker = skip_safety_checker
 
     if do_slice:
-        pipe.enable_attention_slicing()
+        pipeline.enable_attention_slicing()
 
     print("loaded models after:", iso_date_time())
 
+    return pipeline
+
+
+def stable_diffusion_inference(
+    pipeline, prompt, samples, iters, height, width, steps, scale, seed
+):
+    if seed == 0:
+        seed = torch.random.seed()
+
     prefix = prompt.replace(" ", "_")[:170]
 
-    generator = torch.Generator(device=device).manual_seed(seed)
+    generator = torch.Generator(device=cuda_device()).manual_seed(seed)
     for j in range(iters):
-        with autocast(device):
-            result = pipe(
+        with autocast(cuda_device()):
+            result = pipeline(
                 [prompt] * samples,
                 height=height,
                 width=width,
@@ -154,15 +155,12 @@ def main():
     if args.prompt0 is not None:
         args.prompt = args.prompt0
 
-    if args.seed == 0:
-        args.seed = torch.random.seed()
+    pipeline = stable_diffusion_pipeline(
+        args.model, args.half, args.skip, args.attention_slicing, args.token
+    )
 
-    if args.token is None:
-        with open("token.txt") as f:
-            args.token = f.read().replace("\n", "")
-
-    stable_diffusion(
-        args.model,
+    stable_diffusion_inference(
+        pipeline,
         args.prompt,
         args.n_samples,
         args.n_iter,
@@ -171,10 +169,6 @@ def main():
         args.ddim_steps,
         args.scale,
         args.seed,
-        args.half,
-        args.skip,
-        args.attention_slicing,
-        args.token,
     )
 
 
