@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.12.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.11.1...v1.12.0) - 2022-11-01
+
+### Added
+
+* Update transformers to v4.24.0
+
+### Fixed
+
+* Always use torch instead of tensorflow
+
 ## [v1.11.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.11.0...v1.11.1) - 2022-10-26
 
 ### Changed
