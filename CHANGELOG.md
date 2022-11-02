@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.13.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.12.0...v1.13.0) - 2022-11-02
+
+### Added
+
+* Upgrade torch to 1.13.0 and cuda to 11.7
+
 ## [v1.12.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.11.1...v1.12.0) - 2022-11-01
 
 ### Added
