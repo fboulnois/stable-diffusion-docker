@@ -53,9 +53,10 @@ def stable_diffusion_inference(
     for j in range(iters):
         with autocast(cuda_device()):
             result = pipeline(
-                [prompt] * samples,
+                prompt,
                 height=height,
                 width=width,
+                num_images_per_prompt=samples,
                 num_inference_steps=steps,
                 guidance_scale=scale,
                 generator=generator,
