@@ -99,6 +99,8 @@ and increase image creation speed
 * Use `--half` to decrease memory use but slightly decrease image quality
 * Use `--attention-slicing` to decrease memory use but also decrease image
 creation speed
+* Decrease the number of samples and increase the number of iterations with
+`--n_samples` and `--n_iter` to decrease overall memory use
 * Skip the safety checker with `--skip` to run less code
 
 ```sh
