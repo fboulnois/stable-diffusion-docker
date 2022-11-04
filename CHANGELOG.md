@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.15.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.14.0...v1.15.0) - 2022-11-04
+
+### Added
+
+* Add negative prompts
+
+### Changed
+
+* Switch to using num_images_per_prompt
+
 ## [v1.14.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.13.0...v1.14.0) - 2022-11-03
 
 ### Added
