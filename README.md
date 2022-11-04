@@ -66,8 +66,10 @@ Other options:
 * `--attention-slicing`: use less memory at the expense of inference speed
 (default is no attention slicing)
 * `--half`: use float16 tensors instead of float32 (default float32)
-* `--model`: the model used to render images (default is `CompVis/stable-diffusion-v1-4`)
-* `--negative-prompt`: the prompt to not render into an image (default `None`)
+* `--model [MODEL]`: the model used to render images (default is
+`CompVis/stable-diffusion-v1-4`)
+* `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
+(default `None`)
 * `--skip`: skip safety checker (default is the safety checker is on)
 * `--token [TOKEN]`: specify a Huggingface user access token at the command line
 instead of reading it from a file (default is a file)
