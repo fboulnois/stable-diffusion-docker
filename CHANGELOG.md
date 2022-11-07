@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.16.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.15.0...v1.16.0) - 2022-11-07
+
+### Added
+
+* Add standard tests for all options
+* Upgrade diffusers to 0.7.2
+
 ## [v1.15.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.14.0...v1.15.0) - 2022-11-04
 
 ### Added
