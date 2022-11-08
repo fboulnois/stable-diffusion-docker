@@ -13,7 +13,6 @@ clean() {
 }
 
 dev() {
-    mkdir -p output
     docker run --rm --gpus=all --entrypoint=sh \
         -v huggingface:/home/huggingface/.cache/huggingface \
         -v "$PWD"/output:/home/huggingface/output \
@@ -22,7 +21,6 @@ dev() {
 
 run() {
     shift
-    mkdir -p output
     docker run --rm --gpus=all \
         -v huggingface:/home/huggingface/.cache/huggingface \
         -v "$PWD"/output:/home/huggingface/output \
@@ -30,7 +28,6 @@ run() {
 }
 
 tests() {
-    mkdir -p output
     docker run --rm --gpus=all \
         -v huggingface:/home/huggingface/.cache/huggingface \
         -v "$PWD"/output:/home/huggingface/output \
@@ -45,6 +42,7 @@ tests() {
             --prompt "bouquet of roses"
 }
 
+mkdir -p output
 case ${1:-build} in
     build) build ;;
     clean) clean ;;
