@@ -11,6 +11,13 @@ container.
 ![An impressionist painting of a parakeet eating spaghetti in the desert 1](img/An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s1.png)
 ![An impressionist painting of a parakeet eating spaghetti in the desert 2](img/An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s2.png)
 
+```sh
+./build.sh run --image parakeet_eating_spaghetti.png --strength 0.6 'Abstract art'
+```
+
+![Abstract art 1](img/Abstract_art_s1.png)
+![Abstract art 2](img/Abstract_art_s2.png)
+
 ## Before you start
 
 The pipeline uses the full model and weights which requires 8GB+ of GPU RAM. It
@@ -41,10 +48,20 @@ To build:
 
 ## Run
 
+### Text-to-Image
+
 To run:
 
 ```sh
 ./build.sh run 'A high tech solarpunk utopia in the Amazon rainforest'
+```
+
+### Image-to-Image
+
+First, copy an image to the `input` folder. Next, to run:
+
+```sh
+./build.sh run --image image.png 'A high tech solarpunk utopia in the Amazon rainforest'
 ```
 
 ### Options
@@ -65,12 +82,16 @@ Other options:
 
 * `--attention-slicing`: use less memory at the expense of inference speed
 (default is no attention slicing)
-* `--half`: use float16 tensors instead of float32 (default float32)
+* `--half`: use float16 tensors instead of float32 (default `float32`)
+* `--image [IMAGE]`: the input filename to use for image-to-image diffusion
+(default `None`)
 * `--model [MODEL]`: the model used to render images (default is
 `CompVis/stable-diffusion-v1-4`)
 * `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
 (default `None`)
 * `--skip`: skip safety checker (default is the safety checker is on)
+* `--strength [STRENGTH]`: diffusion strength to apply to the original image
+(default 0.75)
 * `--token [TOKEN]`: specify a Huggingface user access token at the command line
 instead of reading it from a file (default is a file)
 
