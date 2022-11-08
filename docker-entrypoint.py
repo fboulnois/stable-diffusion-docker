@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-import argparse, datetime, random, time
+import argparse, datetime, os, random, time
 import torch
+from PIL import Image
 from torch import autocast
-from diffusers import StableDiffusionPipeline
+from diffusers import StableDiffusionPipeline, StableDiffusionImg2ImgPipeline
 
 
 def cuda_device():
@@ -13,20 +14,31 @@ def iso_date_time():
     return datetime.datetime.now().isoformat()
 
 
+def load_image(path):
+    image = Image.open(os.path.join("input", path)).convert("RGB")
+    print("loaded image from %s:" % (path), iso_date_time())
+    return image
+
+
 def skip_safety_checker(images, *args, **kwargs):
     return images, False
 
 
-def stable_diffusion_pipeline(model, half, skip, do_slice, token):
+def stable_diffusion_pipeline(model, image, half, skip, do_slice, token):
     if token is None:
         with open("token.txt") as f:
             token = f.read().replace("\n", "")
+
+    diffuser = StableDiffusionPipeline
+    if image is not None:
+        diffuser = StableDiffusionImg2ImgPipeline
+        image = load_image(image)
 
     dtype, rev = (torch.float16, "fp16") if half else (torch.float32, "main")
 
     print("load pipeline start:", iso_date_time())
 
-    pipeline = StableDiffusionPipeline.from_pretrained(
+    pipeline = diffuser.from_pretrained(
         model, torch_dtype=dtype, revision=rev, use_auth_token=token
     ).to(cuda_device())
 
@@ -38,11 +50,22 @@ def stable_diffusion_pipeline(model, half, skip, do_slice, token):
 
     print("loaded models after:", iso_date_time())
 
-    return pipeline
+    return pipeline, image
 
 
 def stable_diffusion_inference(
-    pipeline, prompt, neg_prompt, samples, iters, height, width, steps, scale, seed
+    pipeline,
+    prompt,
+    neg_prompt,
+    image,
+    samples,
+    iters,
+    height,
+    width,
+    steps,
+    scale,
+    strength,
+    seed,
 ):
     if seed == 0:
         seed = torch.random.seed()
@@ -55,16 +78,18 @@ def stable_diffusion_inference(
             result = pipeline(
                 prompt,
                 negative_prompt=neg_prompt,
+                init_image=image,
                 height=height,
                 width=width,
                 num_images_per_prompt=samples,
                 num_inference_steps=steps,
                 guidance_scale=scale,
+                strength=strength,
                 generator=generator,
             )
 
-        for i, image in enumerate(result.images):
-            image.save(
+        for i, img in enumerate(result.images):
+            img.save(
                 "output/%s__steps_%d__scale_%0.2f__seed_%d__n_%d.png"
                 % (prefix, steps, scale, seed, j * samples + i + 1)
             )
@@ -134,6 +159,12 @@ def main():
         help="Use float16 (half-sized) tensors instead of float32",
     )
     parser.add_argument(
+        "--image",
+        type=str,
+        nargs="?",
+        help="The input filename to use for image-to-image diffusion",
+    )
+    parser.add_argument(
         "--model",
         type=str,
         nargs="?",
@@ -155,6 +186,12 @@ def main():
         help="Skip the safety checker",
     )
     parser.add_argument(
+        "--strength",
+        type=float,
+        default=0.75,
+        help="Diffusion strength to apply to the original image",
+    )
+    parser.add_argument(
         "--token", type=str, nargs="?", help="Huggingface user access token"
     )
 
@@ -163,20 +200,22 @@ def main():
     if args.prompt0 is not None:
         args.prompt = args.prompt0
 
-    pipeline = stable_diffusion_pipeline(
-        args.model, args.half, args.skip, args.attention_slicing, args.token
+    pipeline, image = stable_diffusion_pipeline(
+        args.model, args.image, args.half, args.skip, args.attention_slicing, args.token
     )
 
     stable_diffusion_inference(
         pipeline,
         args.prompt,
         args.negative_prompt,
+        image,
         args.n_samples,
         args.n_iter,
         args.H,
         args.W,
         args.ddim_steps,
         args.scale,
+        args.strength,
         args.seed,
     )
 
