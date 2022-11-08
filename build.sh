@@ -20,7 +20,6 @@ dev() {
 }
 
 run() {
-    shift
     docker run --rm --gpus=all \
         -v huggingface:/home/huggingface/.cache/huggingface \
         -v "$PWD"/output:/home/huggingface/output \
@@ -28,18 +27,12 @@ run() {
 }
 
 tests() {
-    docker run --rm --gpus=all \
-        -v huggingface:/home/huggingface/.cache/huggingface \
-        -v "$PWD"/output:/home/huggingface/output \
-        "$CWD" "abstract art"
-    docker run --rm --gpus=all \
-        -v huggingface:/home/huggingface/.cache/huggingface \
-        -v "$PWD"/output:/home/huggingface/output \
-        "$CWD" --model "runwayml/stable-diffusion-v1-5" \
-            --H 512 --W 512 --n_samples 2 --n_iter 2 --seed 42 \
-            --scale 7.5 --ddim_steps 80 --attention-slicing \
-            --half --skip --negative-prompt "red roses" \
-            --prompt "bouquet of roses"
+    run "abstract art"
+    run --model "runwayml/stable-diffusion-v1-5" \
+        --H 512 --W 512 --n_samples 2 --n_iter 2 --seed 42 \
+        --scale 7.5 --ddim_steps 80 --attention-slicing \
+        --half --skip --negative-prompt "red roses" \
+        --prompt "bouquet of roses"
 }
 
 mkdir -p output
@@ -47,7 +40,7 @@ case ${1:-build} in
     build) build ;;
     clean) clean ;;
     dev) dev "$@" ;;
-    run) run "$@" ;;
+    run) shift; run "$@" ;;
     test) tests ;;
     *) echo "$0: No command named '$1'" ;;
 esac
