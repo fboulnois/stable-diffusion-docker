@@ -1,5 +1,20 @@
 # Changelog
 
+## [v1.17.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.16.0...v1.17.0) - 2022-11-08
+
+### Added
+
+* Add image-to-image diffusion
+* Add input folder for image-to-image diffusion
+
+### Changed
+
+* Call run command directly from tests
+
+### Fixed
+
+* Ensure output folder is always created
+
 ## [v1.16.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.15.0...v1.16.0) - 2022-11-07
 
 ### Added
