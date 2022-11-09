@@ -95,7 +95,7 @@ Other options:
 * `--token [TOKEN]`: specify a Huggingface user access token at the command line
 instead of reading it from a file (default is a file)
 
-### Examples
+## Examples
 
 These commands are both identical:
 
