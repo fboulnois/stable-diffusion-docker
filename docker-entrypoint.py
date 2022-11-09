@@ -189,7 +189,7 @@ def main():
         "--strength",
         type=float,
         default=0.75,
-        help="Diffusion strength to apply to the original image",
+        help="Diffusion strength to apply to the input image",
     )
     parser.add_argument(
         "--token", type=str, nargs="?", help="Huggingface user access token"

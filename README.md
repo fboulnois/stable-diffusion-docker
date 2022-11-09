@@ -90,7 +90,7 @@ Other options:
 * `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
 (default `None`)
 * `--skip`: skip safety checker (default is the safety checker is on)
-* `--strength [STRENGTH]`: diffusion strength to apply to the original image
+* `--strength [STRENGTH]`: diffusion strength to apply to the input image
 (default 0.75)
 * `--token [TOKEN]`: specify a Huggingface user access token at the command line
 instead of reading it from a file (default is a file)
