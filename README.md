@@ -64,6 +64,15 @@ First, copy an image to the `input` folder. Next, to run:
 ./build.sh run --image image.png 'A high tech solarpunk utopia in the Amazon rainforest'
 ```
 
+### Diffusion Inpainting
+
+First, copy an image and an image mask to the `input` folder. White areas of the
+mask will be diffused and black areas will be kept untouched. Next, to run:
+
+```sh
+./build.sh run --image image.png --mask mask.png 'A high tech solarpunk utopia in the Amazon rainforest'
+```
+
 ### Options
 
 Some of the options from [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
@@ -83,8 +92,10 @@ Other options:
 * `--attention-slicing`: use less memory at the expense of inference speed
 (default is no attention slicing)
 * `--half`: use float16 tensors instead of float32 (default `float32`)
-* `--image [IMAGE]`: the input filename to use for image-to-image diffusion
+* `--image [IMAGE]`: the input image to use for image-to-image diffusion
 (default `None`)
+* `--mask [MASK]`: the input mask to use for diffusion inpainting (default
+`None`)
 * `--model [MODEL]`: the model used to render images (default is
 `CompVis/stable-diffusion-v1-4`)
 * `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
