@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.18.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.17.0...v1.18.0) - 2022-11-11
+
+### Added
+
+* Add diffusion inpainting
+
 ## [v1.17.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.16.0...v1.17.0) - 2022-11-08
 
 ### Added
