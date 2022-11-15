@@ -53,7 +53,7 @@ To build:
 To run:
 
 ```sh
-./build.sh run 'A high tech solarpunk utopia in the Amazon rainforest'
+./build.sh run 'Andromeda galaxy in a bottle'
 ```
 
 ### Image-to-Image
@@ -61,7 +61,7 @@ To run:
 First, copy an image to the `input` folder. Next, to run:
 
 ```sh
-./build.sh run --image image.png 'A high tech solarpunk utopia in the Amazon rainforest'
+./build.sh run --image image.png 'Andromeda galaxy in a bottle'
 ```
 
 ### Diffusion Inpainting
@@ -70,7 +70,8 @@ First, copy an image and an image mask to the `input` folder. White areas of the
 mask will be diffused and black areas will be kept untouched. Next, to run:
 
 ```sh
-./build.sh run --image image.png --mask mask.png 'A high tech solarpunk utopia in the Amazon rainforest'
+./build.sh run --model 'runwayml/stable-diffusion-inpainting' \
+  --image image.png --mask mask.png 'Andromeda galaxy in a bottle'
 ```
 
 ### Options
