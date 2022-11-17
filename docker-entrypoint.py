@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 import argparse, datetime, os, random, time
+import numpy as np
 import torch
 from PIL import Image
 from torch import autocast
 from diffusers import (
+    OnnxStableDiffusionPipeline,
+    OnnxStableDiffusionInpaintPipeline,
+    OnnxStableDiffusionImg2ImgPipeline,
     StableDiffusionPipeline,
     StableDiffusionImg2ImgPipeline,
     StableDiffusionInpaintPipeline,
 )
-
-
-def cuda_device():
-    return "cuda"
 
 
 def iso_date_time():
@@ -20,7 +20,7 @@ def iso_date_time():
 
 def load_image(path):
     image = Image.open(os.path.join("input", path)).convert("RGB")
-    print("loaded image from %s:" % (path), iso_date_time())
+    print(f"loaded image from {path}:", iso_date_time(), flush=True)
     return image
 
 
@@ -28,83 +28,88 @@ def skip_safety_checker(images, *args, **kwargs):
     return images, False
 
 
-def stable_diffusion_pipeline(model, image, mask, half, skip, do_slice, token):
-    if token is None:
+def stable_diffusion_pipeline(p):
+    p.dtype = torch.float16 if p.half else torch.float32
+
+    if p.device == "cpu":
+        p.diffuser = OnnxStableDiffusionPipeline
+        p.revision = "onnx"
+    else:
+        p.diffuser = StableDiffusionPipeline
+        p.revision = "fp16" if p.half else "main"
+
+    if p.image is not None:
+        if p.revision == "onnx":
+            p.diffuser = OnnxStableDiffusionImg2ImgPipeline
+        else:
+            p.diffuser = StableDiffusionImg2ImgPipeline
+        p.image = load_image(p.image)
+
+    if p.mask is not None:
+        if p.revision == "onnx":
+            p.diffuser = OnnxStableDiffusionInpaintPipeline
+        else:
+            p.diffuser = StableDiffusionInpaintPipeline
+        p.mask = load_image(p.mask)
+
+    if p.token is None:
         with open("token.txt") as f:
-            token = f.read().replace("\n", "")
+            p.token = f.read().replace("\n", "")
 
-    diffuser = StableDiffusionPipeline
+    if p.seed == 0:
+        p.seed = torch.random.seed()
 
-    if image is not None:
-        diffuser = StableDiffusionImg2ImgPipeline
-        image = load_image(image)
+    if p.revision == "onnx":
+        p.seed = p.seed >> 32 if p.seed > 2**32 - 1 else p.seed
+        p.generator = np.random.RandomState(p.seed)
+    else:
+        p.generator = torch.Generator(device=p.device).manual_seed(p.seed)
 
-    if mask is not None:
-        diffuser = StableDiffusionInpaintPipeline
-        mask = load_image(mask)
+    print("load pipeline start:", iso_date_time(), flush=True)
 
-    dtype, rev = (torch.float16, "fp16") if half else (torch.float32, "main")
+    pipeline = p.diffuser.from_pretrained(
+        p.model,
+        torch_dtype=p.dtype,
+        revision=p.revision,
+        use_auth_token=p.token,
+    ).to(p.device)
 
-    print("load pipeline start:", iso_date_time())
-
-    pipeline = diffuser.from_pretrained(
-        model, torch_dtype=dtype, revision=rev, use_auth_token=token
-    ).to(cuda_device())
-
-    if skip:
+    if p.skip:
         pipeline.safety_checker = skip_safety_checker
 
-    if do_slice:
+    if p.attention_slicing:
         pipeline.enable_attention_slicing()
 
-    print("loaded models after:", iso_date_time())
+    p.pipeline = pipeline
 
-    return pipeline, image, mask
+    print("loaded models after:", iso_date_time(), flush=True)
+
+    return p
 
 
-def stable_diffusion_inference(
-    pipeline,
-    prompt,
-    neg_prompt,
-    image,
-    mask,
-    samples,
-    iters,
-    height,
-    width,
-    steps,
-    scale,
-    strength,
-    seed,
-):
-    if seed == 0:
-        seed = torch.random.seed()
-
-    prefix = prompt.replace(" ", "_")[:170]
-
-    generator = torch.Generator(device=cuda_device()).manual_seed(seed)
-    for j in range(iters):
-        with autocast(cuda_device()):
-            result = pipeline(
-                prompt,
-                negative_prompt=neg_prompt,
-                init_image=image,
-                image=image,
-                mask_image=mask,
-                height=height,
-                width=width,
-                num_images_per_prompt=samples,
-                num_inference_steps=steps,
-                guidance_scale=scale,
-                strength=strength,
-                generator=generator,
+def stable_diffusion_inference(p):
+    prefix = p.prompt.replace(" ", "_")[:170]
+    for j in range(p.n_iter):
+        with autocast(p.device):
+            result = p.pipeline(
+                p.prompt,
+                negative_prompt=p.negative_prompt,
+                init_image=p.image,
+                image=p.image,
+                mask_image=p.mask,
+                height=p.H,
+                width=p.W,
+                num_images_per_prompt=p.n_samples,
+                num_inference_steps=p.ddim_steps,
+                guidance_scale=p.scale,
+                strength=p.strength,
+                generator=p.generator,
             )
 
         for i, img in enumerate(result.images):
-            img.save(
-                "output/%s__steps_%d__scale_%0.2f__seed_%d__n_%d.png"
-                % (prefix, steps, scale, seed, j * samples + i + 1)
-            )
+            idx = j * p.n_samples + i + 1
+            out = f"{prefix}__steps_{p.ddim_steps}__scale_{p.scale:.2f}__seed_{p.seed}__n_{idx}.png"
+            img.save(os.path.join("output", out))
 
     print("completed pipeline:", iso_date_time(), flush=True)
 
@@ -163,6 +168,13 @@ def main():
         help="Use less memory at the expense of inference speed",
     )
     parser.add_argument(
+        "--device",
+        type=str,
+        nargs="?",
+        default="cuda",
+        help="The cpu or cuda device to use to render images",
+    )
+    parser.add_argument(
         "--half",
         type=bool,
         nargs="?",
@@ -218,31 +230,8 @@ def main():
     if args.prompt0 is not None:
         args.prompt = args.prompt0
 
-    pipeline, image, mask = stable_diffusion_pipeline(
-        args.model,
-        args.image,
-        args.mask,
-        args.half,
-        args.skip,
-        args.attention_slicing,
-        args.token,
-    )
-
-    stable_diffusion_inference(
-        pipeline,
-        args.prompt,
-        args.negative_prompt,
-        image,
-        mask,
-        args.n_samples,
-        args.n_iter,
-        args.H,
-        args.W,
-        args.ddim_steps,
-        args.scale,
-        args.strength,
-        args.seed,
-    )
+    pipeline = stable_diffusion_pipeline(args)
+    stable_diffusion_inference(pipeline)
 
 
 if __name__ == "__main__":
