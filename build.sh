@@ -29,9 +29,9 @@ run() {
 }
 
 tests() {
-    run "abstract art"
+    run --H 512 --W 640 "abstract art"
     run --model "runwayml/stable-diffusion-v1-5" \
-        --H 512 --W 512 --n_samples 2 --n_iter 2 --seed 42 \
+        --n_samples 2 --n_iter 2 --seed 42 \
         --scale 7.5 --ddim_steps 80 --attention-slicing \
         --half --skip --negative-prompt "red roses" \
         --prompt "bouquet of roses"
