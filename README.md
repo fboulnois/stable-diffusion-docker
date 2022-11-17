@@ -20,10 +20,11 @@ container.
 
 ## Before you start
 
-The pipeline uses the full model and weights which requires 8GB+ of GPU RAM. It
-should take a few seconds to create one image. On smaller GPUs you may need to
-modify some of the parameters, see the [Examples](#examples) section for more
-details.
+By default, the pipeline uses the full model and weights which requires a CUDA
+capable GPU with 8GB+ of VRAM. It should take a few seconds to create one image.
+On less powerful GPUs you may need to modify some of the options; see the
+[Examples](#examples) section for more details. If you lack a suitable GPU you
+can set the option `--device cpu` instead.
 
 Since it uses the official model, you will need to create a [user access token](https://huggingface.co/docs/hub/security-tokens)
 in your [Huggingface account](https://huggingface.co/settings/tokens). Save the
@@ -92,6 +93,8 @@ Other options:
 
 * `--attention-slicing`: use less memory at the expense of inference speed
 (default is no attention slicing)
+* `--device [DEVICE]`: the cpu or cuda device to use to render images (default
+`cuda`)
 * `--half`: use float16 tensors instead of float32 (default `float32`)
 * `--image [IMAGE]`: the input image to use for image-to-image diffusion
 (default `None`)
