@@ -29,8 +29,10 @@ run() {
 }
 
 tests() {
+    TEST_IMAGE="An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s1.png"
+    cp "img/${TEST_IMAGE}" "input/${TEST_IMAGE}"
     run --H 512 --W 640 "abstract art"
-    run --device cpu "abstract art"
+    run --device cpu --image "${TEST_IMAGE}" --strength 0.6 "abstract art"
     run --model "runwayml/stable-diffusion-v1-5" \
         --n_samples 2 --n_iter 2 --seed 42 \
         --scale 7.5 --ddim_steps 80 --attention-slicing \
