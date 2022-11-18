@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.19.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.18.0...v1.19.0) - 2022-11-17
+
+### Added
+
+* Add test for cpu pipeline
+* Add cpu pipeline using onnx
+
+### Changed
+
+* Test image with different dimensions
+
 ## [v1.18.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.17.0...v1.18.0) - 2022-11-11
 
 ### Added
