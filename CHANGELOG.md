@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.19.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.19.0...v1.19.1) - 2022-11-22
+
+### Added
+
+* Test image to image pipeline
+
+### Fixed
+
+* Do not pass gpu arg if using cpu pipeline
+
 ## [v1.19.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.18.0...v1.19.0) - 2022-11-17
 
 ### Added
