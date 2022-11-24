@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.10.0-gpu
+FROM tensorflow/tensorflow:2.11.0-gpu
 
 RUN rm -rf /usr/local/cuda/lib64/stubs
 
