@@ -159,7 +159,10 @@ MSYS_NO_PATHCONV=1 ./build.sh run --half --prompt 'abstract art'
 
 ### Model
 
-The model and other files are cached in a volume called `huggingface`.
+The model and other files are cached in a volume called `huggingface`. The
+models are stored in `<volume>/diffusers/<model>/snapshots/<githash>/unet/<weights>`.
+Checkpoint files (`ckpt`s) are unofficial versions of the official models, and
+so these are not part of the official release.
 
 ### Images
 
