@@ -24,10 +24,6 @@ def load_image(path):
     return image
 
 
-def skip_safety_checker(images, *args, **kwargs):
-    return images, False
-
-
 def stable_diffusion_pipeline(p):
     p.dtype = torch.float16 if p.half else torch.float32
 
@@ -75,7 +71,7 @@ def stable_diffusion_pipeline(p):
     ).to(p.device)
 
     if p.skip:
-        pipeline.safety_checker = skip_safety_checker
+        pipeline.safety_checker = None
 
     if p.attention_slicing:
         pipeline.enable_attention_slicing()
