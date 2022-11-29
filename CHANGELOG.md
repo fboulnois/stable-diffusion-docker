@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.20.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.19.1...v1.20.0) - 2022-11-29
+
+### Added
+
+* Update diffusers to 0.9.0
+* Update tensorflow to 2.11.0
+
+### Fixed
+
+* Ensure skip option works on onnx pipeline
+
 ## [v1.19.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.19.0...v1.19.1) - 2022-11-22
 
 ### Added
