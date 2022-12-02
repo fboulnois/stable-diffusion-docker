@@ -10,6 +10,7 @@ from diffusers import (
     StableDiffusionPipeline,
     StableDiffusionImg2ImgPipeline,
     StableDiffusionInpaintPipeline,
+    StableDiffusionUpscalePipeline,
 )
 
 
@@ -51,9 +52,12 @@ def stable_diffusion_pipeline(p):
         p.diffuser = StableDiffusionPipeline
         p.revision = "fp16" if p.half else "main"
 
+    upscalers = ["stabilityai/stable-diffusion-x4-upscaler"]
     if p.image is not None:
         if p.revision == "onnx":
             p.diffuser = OnnxStableDiffusionImg2ImgPipeline
+        elif p.model in upscalers:
+            p.diffuser = StableDiffusionUpscalePipeline
         else:
             p.diffuser = StableDiffusionImg2ImgPipeline
         p.image = load_image(p.image)
