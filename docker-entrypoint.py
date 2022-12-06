@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import argparse, datetime, os, random, time
+import argparse, datetime, os
 import numpy as np
 import torch
 from PIL import Image
