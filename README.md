@@ -24,9 +24,9 @@ By default, the pipeline uses the full model and weights which requires a CUDA
 capable GPU with 8GB+ of VRAM. It should take a few seconds to create one image.
 On less powerful GPUs you may need to modify some of the options; see the
 [Examples](#examples) section for more details. If you lack a suitable GPU you
-can set the option `--device cpu` instead. If you are using Docker Desktop you
-may need to give Docker more resources by increasing the CPU, memory, and swap
-in the Settings -> Resources section.
+can set the option `--device cpu` instead. If you are using Docker Desktop and
+the container is terminated you may need to give Docker more resources by
+increasing the CPU, memory, and swap in the Settings -> Resources section.
 
 Since it uses the official model, you will need to create a [user access token](https://huggingface.co/docs/hub/security-tokens)
 in your [Huggingface account](https://huggingface.co/settings/tokens). Save the
