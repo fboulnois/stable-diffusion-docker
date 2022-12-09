@@ -1,5 +1,20 @@
 # Changelog
 
+## [v1.21.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.20.0...v1.21.0) - 2022-12-09
+
+### Added
+
+* Update diffusers to 0.10.1
+* Update diffusers to 0.10.0
+* Update transformers to 4.25.1
+
+### Fixed
+
+* Remove use of autocast
+* Remove unused arguments from pipeline
+* Return after setting gpu arg
+* Removed unused imports
+
 ## [v1.20.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.19.1...v1.20.0) - 2022-11-29
 
 ### Added
