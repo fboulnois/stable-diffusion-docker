@@ -3,7 +3,6 @@ import argparse, datetime, inspect, os
 import numpy as np
 import torch
 from PIL import Image
-from torch import autocast
 from diffusers import (
     OnnxStableDiffusionPipeline,
     OnnxStableDiffusionInpaintPipeline,
@@ -104,8 +103,7 @@ def stable_diffusion_pipeline(p):
 def stable_diffusion_inference(p):
     prefix = p.prompt.replace(" ", "_")[:170]
     for j in range(p.n_iter):
-        with autocast(p.device):
-            result = p.pipeline(**remove_unused_args(p))
+        result = p.pipeline(**remove_unused_args(p))
 
         for i, img in enumerate(result.images):
             idx = j * p.n_samples + i + 1
