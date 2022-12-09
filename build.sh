@@ -8,6 +8,7 @@ set_gpu_arg() {
     while [ "$#" -gt 0 ]; do
         if [ "$1" = "--device" ] && [ "$2" = "cpu" ]; then
             GPU_ARG=""
+            return
         fi
         shift
     done
