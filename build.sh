@@ -5,13 +5,14 @@ set -eu
 CWD=$(basename "$PWD")
 
 set_gpu_arg() {
+    GPU_ARG="--gpus=all"
+    
     while [ "$#" -gt 0 ]; do
         if [ "$1" = "--device" ] && [ "$2" = "cpu" ]; then
             GPU_ARG=""
         fi
         shift
     done
-    GPU_ARG="--gpus=all"
 }
 
 build() {
