@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import argparse, datetime, os
+import argparse, datetime, inspect, os
 import numpy as np
 import torch
 from PIL import Image
@@ -22,6 +22,24 @@ def load_image(path):
     image = Image.open(os.path.join("input", path)).convert("RGB")
     print(f"loaded image from {path}:", iso_date_time(), flush=True)
     return image
+
+
+def remove_unused_args(p):
+    params = inspect.signature(p.pipeline).parameters.keys()
+    args = {
+        'prompt': p.prompt,
+        'negative_prompt': p.negative_prompt,
+        'image': p.image,
+        'mask_image': p.mask,
+        'height': p.H,
+        'width': p.W,
+        'num_images_per_prompt': p.n_samples,
+        'num_inference_steps': p.ddim_steps,
+        'guidance_scale': p.scale,
+        'strength': p.strength,
+        'generator': p.generator,
+    }
+    return {p: args[p] for p in params if p in args}
 
 
 def stable_diffusion_pipeline(p):
@@ -87,20 +105,7 @@ def stable_diffusion_inference(p):
     prefix = p.prompt.replace(" ", "_")[:170]
     for j in range(p.n_iter):
         with autocast(p.device):
-            result = p.pipeline(
-                p.prompt,
-                negative_prompt=p.negative_prompt,
-                init_image=p.image,
-                image=p.image,
-                mask_image=p.mask,
-                height=p.H,
-                width=p.W,
-                num_images_per_prompt=p.n_samples,
-                num_inference_steps=p.ddim_steps,
-                guidance_scale=p.scale,
-                strength=p.strength,
-                generator=p.generator,
-            )
+            result = p.pipeline(**remove_unused_args(p))
 
         for i, img in enumerate(result.images):
             idx = j * p.n_samples + i + 1
