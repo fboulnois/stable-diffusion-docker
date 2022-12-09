@@ -26,17 +26,17 @@ def load_image(path):
 def remove_unused_args(p):
     params = inspect.signature(p.pipeline).parameters.keys()
     args = {
-        'prompt': p.prompt,
-        'negative_prompt': p.negative_prompt,
-        'image': p.image,
-        'mask_image': p.mask,
-        'height': p.H,
-        'width': p.W,
-        'num_images_per_prompt': p.n_samples,
-        'num_inference_steps': p.ddim_steps,
-        'guidance_scale': p.scale,
-        'strength': p.strength,
-        'generator': p.generator,
+        "prompt": p.prompt,
+        "negative_prompt": p.negative_prompt,
+        "image": p.image,
+        "mask_image": p.mask,
+        "height": p.H,
+        "width": p.W,
+        "num_images_per_prompt": p.n_samples,
+        "num_inference_steps": p.ddim_steps,
+        "guidance_scale": p.scale,
+        "strength": p.strength,
+        "generator": p.generator,
     }
     return {p: args[p] for p in params if p in args}
 
