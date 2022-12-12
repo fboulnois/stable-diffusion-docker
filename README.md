@@ -67,6 +67,15 @@ First, copy an image to the `input` folder. Next, to run:
 ./build.sh run --image image.png 'Andromeda galaxy in a bottle'
 ```
 
+### Image Upscaling
+
+First, copy an image to the `input` folder. Next, to run:
+
+```sh
+./build.sh run --model 'stabilityai/stable-diffusion-x4-upscaler' \
+  --image image.png 'A detailed description of the image'
+```
+
 ### Diffusion Inpainting
 
 First, copy an image and an image mask to the `input` folder. White areas of the
