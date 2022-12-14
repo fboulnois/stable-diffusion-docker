@@ -7,6 +7,7 @@ from diffusers import (
     OnnxStableDiffusionPipeline,
     OnnxStableDiffusionInpaintPipeline,
     OnnxStableDiffusionImg2ImgPipeline,
+    StableDiffusionDepth2ImgPipeline,
     StableDiffusionPipeline,
     StableDiffusionImg2ImgPipeline,
     StableDiffusionInpaintPipeline,
@@ -53,11 +54,18 @@ def stable_diffusion_pipeline(p):
         p.diffuser = StableDiffusionPipeline
         p.revision = "fp16" if p.half else "main"
 
-    upscalers = ["stabilityai/stable-diffusion-x4-upscaler"]
+    models = argparse.Namespace(
+        **{
+            "depth2img": ["stabilityai/stable-diffusion-2-depth"],
+            "upscalers": ["stabilityai/stable-diffusion-x4-upscaler"],
+        }
+    )
     if p.image is not None:
         if p.revision == "onnx":
             p.diffuser = OnnxStableDiffusionImg2ImgPipeline
-        elif p.model in upscalers:
+        elif p.model in models.depth2img:
+            p.diffuser = StableDiffusionDepth2ImgPipeline
+        elif p.model in models.upscalers:
             p.diffuser = StableDiffusionUpscalePipeline
         else:
             p.diffuser = StableDiffusionImg2ImgPipeline
