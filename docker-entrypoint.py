@@ -97,6 +97,9 @@ def stable_diffusion_pipeline(p):
     if p.attention_slicing:
         pipeline.enable_attention_slicing()
 
+    if p.xformers_memory_efficient_attention:
+        pipeline.enable_xformers_memory_efficient_attention()
+
     p.pipeline = pipeline
 
     print("loaded models after:", iso_date_time(), flush=True)
@@ -226,6 +229,14 @@ def main():
     )
     parser.add_argument(
         "--token", type=str, nargs="?", help="Huggingface user access token"
+    )
+    parser.add_argument(
+        "--xformers-memory-efficient-attention",
+        type=bool,
+        nargs="?",
+        const=True,
+        default=False,
+        help="Use less memory but require the xformers library",
     )
 
     args = parser.parse_args()
