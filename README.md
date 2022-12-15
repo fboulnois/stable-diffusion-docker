@@ -158,7 +158,9 @@ pipeline and the hardware supports the option
 * Skip the safety checker with `--skip` to run less code
 
 ```sh
-./build.sh run --W 256 --H 256 --half --attention-slicing --xformers-memory-efficient-attention --n_samples 1 --n_iter 1 --skip --prompt 'abstract art'
+./build.sh run --W 256 --H 256 --half \
+  --attention-slicing --xformers-memory-efficient-attention \
+  --n_samples 1 --n_iter 1 --skip --prompt 'abstract art'
 ```
 
 On Windows, if you aren't using WSL2 and instead use MSYS, MinGW, or Git Bash,
