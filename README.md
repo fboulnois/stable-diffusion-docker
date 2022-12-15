@@ -120,6 +120,8 @@ Other options:
 (default 0.75)
 * `--token [TOKEN]`: specify a Huggingface user access token at the command line
 instead of reading it from a file (default is a file)
+* `--xformers-memory-efficient-attention`: use less memory but require the
+xformers library (default is that xformers is not required)
 
 ## Examples
 
@@ -149,6 +151,8 @@ and increase image creation speed
 * Use `--half` to decrease memory use but slightly decrease image quality
 * Use `--attention-slicing` to decrease memory use but also decrease image
 creation speed
+* Use `--xformers-memory-efficient-attention` to decrease memory use if the
+pipeline and the hardware supports the option
 * Decrease the number of samples and increase the number of iterations with
 `--n_samples` and `--n_iter` to decrease overall memory use
 * Skip the safety checker with `--skip` to run less code
