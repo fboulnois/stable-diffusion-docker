@@ -43,7 +43,7 @@ run() {
 tests() {
     TEST_IMAGE="An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s1.png"
     cp "img/${TEST_IMAGE}" "input/${TEST_IMAGE}"
-    run --H 512 --W 640 "abstract art"
+    run --skip --H 512 --W 640 "abstract art"
     run --device cpu --image "${TEST_IMAGE}" --strength 0.6 "abstract art"
     run --model "stabilityai/stable-diffusion-x4-upscaler" \
         --image "${TEST_IMAGE}" --half --attention-slicing \
