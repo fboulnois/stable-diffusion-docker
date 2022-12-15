@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.23.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.22.0...v1.23.0) - 2022-12-14
+
+### Added
+
+* Add memory efficient transformers
+* Add test for image upscaling
+
+### Fixed
+
+* Ensure default test produces output
+
 ## [v1.22.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.21.0...v1.22.0) - 2022-12-12
 
 ### Added
