@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.11.0-gpu
+FROM python:3.10-slim-bullseye
 
 RUN rm -rf /usr/local/cuda/lib64/stubs
 
