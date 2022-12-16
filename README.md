@@ -1,7 +1,7 @@
 # Stable Diffusion in Docker
 
-Runs the official [Stable Diffusion](https://huggingface.co/CompVis/stable-diffusion)
-release on [Huggingface](https://huggingface.co/) in a GPU accelerated Docker
+Run the official [Stable Diffusion](https://huggingface.co/CompVis/stable-diffusion)
+releases on [Huggingface](https://huggingface.co/) in a GPU accelerated Docker
 container.
 
 ```sh
