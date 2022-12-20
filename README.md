@@ -51,7 +51,7 @@ To build:
 
 ## Run
 
-### Text-to-Image
+### Text-to-Image (`txt2img`)
 
 To run:
 
@@ -59,7 +59,7 @@ To run:
 ./build.sh run 'Andromeda galaxy in a bottle'
 ```
 
-### Image-to-Image
+### Image-to-Image (`img2img`)
 
 First, copy an image to the `input` folder. Next, to run:
 
@@ -67,7 +67,7 @@ First, copy an image to the `input` folder. Next, to run:
 ./build.sh run --image image.png 'Andromeda galaxy in a bottle'
 ```
 
-### Image Upscaling
+### Image Upscaling (`upscale4x`)
 
 First, copy an image to the `input` folder. Next, to run:
 
@@ -76,7 +76,7 @@ First, copy an image to the `input` folder. Next, to run:
   --image image.png 'A detailed description of the image'
 ```
 
-### Diffusion Inpainting
+### Diffusion Inpainting (`inpaint`)
 
 First, copy an image and an image mask to the `input` folder. White areas of the
 mask will be diffused and black areas will be kept untouched. Next, to run:
