@@ -45,6 +45,10 @@ tests() {
     cp "img/${TEST_IMAGE}" "input/${TEST_IMAGE}"
     run --skip --H 512 --W 640 "abstract art"
     run --device cpu --image "${TEST_IMAGE}" --strength 0.6 "abstract art"
+    run --model "stabilityai/stable-diffusion-2" \
+        --skip --H 768 --W 768 "abstract art"
+    run --model "stabilityai/stable-diffusion-2-1" \
+        --skip --H 768 --W 768 "abstract art"
     run --model "stabilityai/stable-diffusion-x4-upscaler" \
         --image "${TEST_IMAGE}" --half --attention-slicing \
         --xformers-memory-efficient-attention \
