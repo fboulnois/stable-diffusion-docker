@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.24.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.23.0...v1.24.0) - 2022-12-20
+
+### Added
+
+* Add tests for stable diffusion 2.0 and 2.1
+* Update diffusers to 0.11.1
+* Switch to python slim and halve image size
+
 ## [v1.23.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.22.0...v1.23.0) - 2022-12-14
 
 ### Added
