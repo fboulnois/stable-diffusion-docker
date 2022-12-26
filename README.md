@@ -115,6 +115,8 @@ Other options:
 `CompVis/stable-diffusion-v1-4`)
 * `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
 (default `None`)
+* `--scheduler [SCHEDULER]`: the scheduler used to denoise the image (default
+`None`)
 * `--skip`: skip safety checker (default is the safety checker is on)
 * `--strength [STRENGTH]`: diffusion strength to apply to the input image
 (default 0.75)
