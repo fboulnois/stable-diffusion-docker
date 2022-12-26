@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.25.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.24.0...v1.25.0) - 2022-12-26
+
+### Added
+
+* Add test for scheduler option
+* Allow different schedulers to be used
+* Update torch to 1.13.1 and unstable xformers
+
 ## [v1.24.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.23.0...v1.24.0) - 2022-12-20
 
 ### Added
