@@ -11,6 +11,7 @@ from diffusers import (
     StableDiffusionImg2ImgPipeline,
     StableDiffusionInpaintPipeline,
     StableDiffusionUpscalePipeline,
+    schedulers,
 )
 
 
@@ -90,6 +91,10 @@ def stable_diffusion_pipeline(p):
         revision=p.revision,
         use_auth_token=p.token,
     ).to(p.device)
+
+    if p.scheduler is not None:
+        scheduler = getattr(schedulers, p.scheduler)
+        pipeline.scheduler = scheduler.from_config(pipeline.scheduler.config)
 
     if p.skip:
         pipeline.safety_checker = None
@@ -212,6 +217,12 @@ def main():
         type=str,
         nargs="?",
         help="The prompt to not render into an image",
+    )
+    parser.add_argument(
+        "--scheduler",
+        type=str,
+        nargs="?",
+        help="The scheduler used to denoise the image",
     )
     parser.add_argument(
         "--skip",
