@@ -222,7 +222,7 @@ def main():
         "--scheduler",
         type=str,
         nargs="?",
-        help="The scheduler used to denoise the image",
+        help="Override the scheduler used to denoise the image",
     )
     parser.add_argument(
         "--skip",
