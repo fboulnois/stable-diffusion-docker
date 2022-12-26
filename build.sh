@@ -55,6 +55,7 @@ tests() {
         --prompt "An impressionist painting of a parakeet eating spaghetti in the desert"
     run --model "runwayml/stable-diffusion-v1-5" \
         --n_samples 2 --n_iter 2 --seed 42 \
+        --scheduler HeunDiscreteScheduler \
         --scale 7.5 --ddim_steps 80 --attention-slicing \
         --half --skip --negative-prompt "red roses" \
         --prompt "bouquet of roses"
