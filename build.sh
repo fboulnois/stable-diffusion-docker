@@ -49,12 +49,12 @@ run() {
 tests() {
     TEST_IMAGE="An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s1.png"
     cp "img/${TEST_IMAGE}" "input/${TEST_IMAGE}"
-    run --skip --H 512 --W 640 "abstract art"
+    run --skip --height 512 --width 640 "abstract art"
     run --device cpu --image "${TEST_IMAGE}" --strength 0.6 "abstract art"
     run --model "stabilityai/stable-diffusion-2" \
-        --skip --H 768 --W 768 "abstract art"
+        --skip --height 768 --width 768 "abstract art"
     run --model "stabilityai/stable-diffusion-2-1" \
-        --skip --H 768 --W 768 "abstract art"
+        --skip --height 768 --width 768 "abstract art"
     run --model "stabilityai/stable-diffusion-x4-upscaler" \
         --image "${TEST_IMAGE}" --half --attention-slicing \
         --xformers-memory-efficient-attention \
@@ -66,9 +66,9 @@ tests() {
         --negative-prompt "bad, ugly, deformed, malformed, mutated, bad anatomy" \
         --prompt "a toucan"
     run --model "runwayml/stable-diffusion-v1-5" \
-        --n_samples 2 --n_iter 2 --seed 42 \
+        --samples 2 --iters 2 --seed 42 \
         --scheduler HeunDiscreteScheduler \
-        --scale 7.5 --ddim_steps 80 --attention-slicing \
+        --scale 7.5 --steps 80 --attention-slicing \
         --half --skip --negative-prompt "red roses" \
         --prompt "bouquet of roses"
 }
