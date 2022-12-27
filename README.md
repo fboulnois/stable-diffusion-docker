@@ -176,6 +176,22 @@ Options can be combined:
 ./build.sh run --scale 7.0 --seed 42 'abstract art'
 ```
 
+Many popular models are supported out-of-the-box:
+
+| Model Name | Option using `--model` |
+|------------|------------------------|
+| [Stable Diffusion 1.4](https://huggingface.co/CompVis/stable-diffusion-v1-4) | `'CompVis/stable-diffusion-v1-4'` |
+| [Stable Diffusion 1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5) | `'runwayml/stable-diffusion-v1-5'` |
+| [Stable Diffusion 2.0](https://huggingface.co/stabilityai/stable-diffusion-2) | `'stabilityai/stable-diffusion-2'` |
+| [Stable Diffusion 2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1) | `'stabilityai/stable-diffusion-2-1'` |
+| [OpenJourney 1.0](https://huggingface.co/prompthero/openjourney) | `'prompthero/openjourney'` |
+| [Dreamlike Diffusion 1.0](https://huggingface.co/dreamlike-art/dreamlike-diffusion-1.0) | `'dreamlike-art/dreamlike-diffusion-1.0'` |
+| [and more!](https://huggingface.co/models?other=stable-diffusion&sort=likes) | ... |
+
+```sh
+./build.sh run --model 'prompthero/openjourney' --prompt 'abstract art'
+```
+
 On systems without enough GPU VRAM, you can try mixing and matching options:
 
 * Make images smaller than 512x512 using `--height` and `--width` to decrease
