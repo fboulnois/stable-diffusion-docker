@@ -138,49 +138,6 @@ def stable_diffusion_inference(p):
 def main():
     parser = argparse.ArgumentParser(description="Create images from a text prompt.")
     parser.add_argument(
-        "prompt0",
-        metavar="PROMPT",
-        type=str,
-        nargs="?",
-        help="The prompt to render into an image",
-    )
-    parser.add_argument(
-        "--prompt", type=str, nargs="?", help="The prompt to render into an image"
-    )
-    parser.add_argument(
-        "--samples",
-        type=int,
-        nargs="?",
-        default=1,
-        help="Number of images to create per run",
-    )
-    parser.add_argument(
-        "--iters",
-        type=int,
-        nargs="?",
-        default=1,
-        help="Number of times to run pipeline",
-    )
-    parser.add_argument(
-        "--height", type=int, nargs="?", default=512, help="Image height in pixels"
-    )
-    parser.add_argument(
-        "--width", type=int, nargs="?", default=512, help="Image width in pixels"
-    )
-    parser.add_argument(
-        "--scale",
-        type=float,
-        nargs="?",
-        default=7.5,
-        help="Classifier free guidance scale",
-    )
-    parser.add_argument(
-        "--seed", type=int, nargs="?", default=0, help="RNG seed for repeatability"
-    )
-    parser.add_argument(
-        "--steps", type=int, nargs="?", default=50, help="Number of sampling steps"
-    )
-    parser.add_argument(
         "--attention-slicing",
         type=bool,
         nargs="?",
@@ -204,10 +161,20 @@ def main():
         help="Use float16 (half-sized) tensors instead of float32",
     )
     parser.add_argument(
+        "--height", type=int, nargs="?", default=512, help="Image height in pixels"
+    )
+    parser.add_argument(
         "--image",
         type=str,
         nargs="?",
         help="The input image to use for image-to-image diffusion",
+    )
+    parser.add_argument(
+        "--iters",
+        type=int,
+        nargs="?",
+        default=1,
+        help="Number of times to run pipeline",
     )
     parser.add_argument(
         "--mask",
@@ -229,10 +196,30 @@ def main():
         help="The prompt to not render into an image",
     )
     parser.add_argument(
+        "--prompt", type=str, nargs="?", help="The prompt to render into an image"
+    )
+    parser.add_argument(
+        "--samples",
+        type=int,
+        nargs="?",
+        default=1,
+        help="Number of images to create per run",
+    )
+    parser.add_argument(
+        "--scale",
+        type=float,
+        nargs="?",
+        default=7.5,
+        help="Classifier free guidance scale",
+    )
+    parser.add_argument(
         "--scheduler",
         type=str,
         nargs="?",
         help="Override the scheduler used to denoise the image",
+    )
+    parser.add_argument(
+        "--seed", type=int, nargs="?", default=0, help="RNG seed for repeatability"
     )
     parser.add_argument(
         "--skip",
@@ -241,6 +228,9 @@ def main():
         const=True,
         default=False,
         help="Skip the safety checker",
+    )
+    parser.add_argument(
+        "--steps", type=int, nargs="?", default=50, help="Number of sampling steps"
     )
     parser.add_argument(
         "--strength",
@@ -252,12 +242,22 @@ def main():
         "--token", type=str, nargs="?", help="Huggingface user access token"
     )
     parser.add_argument(
+        "--width", type=int, nargs="?", default=512, help="Image width in pixels"
+    )
+    parser.add_argument(
         "--xformers-memory-efficient-attention",
         type=bool,
         nargs="?",
         const=True,
         default=False,
         help="Use less memory but require the xformers library",
+    )
+    parser.add_argument(
+        "prompt0",
+        metavar="PROMPT",
+        type=str,
+        nargs="?",
+        help="The prompt to render into an image",
     )
 
     args = parser.parse_args()
