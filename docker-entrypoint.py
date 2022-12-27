@@ -33,10 +33,10 @@ def remove_unused_args(p):
         "negative_prompt": p.negative_prompt,
         "image": p.image,
         "mask_image": p.mask,
-        "height": p.H,
-        "width": p.W,
-        "num_images_per_prompt": p.n_samples,
-        "num_inference_steps": p.ddim_steps,
+        "height": p.height,
+        "width": p.width,
+        "num_images_per_prompt": p.samples,
+        "num_inference_steps": p.steps,
         "guidance_scale": p.scale,
         "strength": p.strength,
         "generator": p.generator,
@@ -124,12 +124,12 @@ def stable_diffusion_pipeline(p):
 
 def stable_diffusion_inference(p):
     prefix = p.prompt.replace(" ", "_")[:170]
-    for j in range(p.n_iter):
+    for j in range(p.iters):
         result = p.pipeline(**remove_unused_args(p))
 
         for i, img in enumerate(result.images):
-            idx = j * p.n_samples + i + 1
-            out = f"{prefix}__steps_{p.ddim_steps}__scale_{p.scale:.2f}__seed_{p.seed}__n_{idx}.png"
+            idx = j * p.samples + i + 1
+            out = f"{prefix}__steps_{p.steps}__scale_{p.scale:.2f}__seed_{p.seed}__n_{idx}.png"
             img.save(os.path.join("output", out))
 
     print("completed pipeline:", iso_date_time(), flush=True)
@@ -148,24 +148,24 @@ def main():
         "--prompt", type=str, nargs="?", help="The prompt to render into an image"
     )
     parser.add_argument(
-        "--n_samples",
+        "--samples",
         type=int,
         nargs="?",
         default=1,
         help="Number of images to create per run",
     )
     parser.add_argument(
-        "--n_iter",
+        "--iters",
         type=int,
         nargs="?",
         default=1,
         help="Number of times to run pipeline",
     )
     parser.add_argument(
-        "--H", type=int, nargs="?", default=512, help="Image height in pixels"
+        "--height", type=int, nargs="?", default=512, help="Image height in pixels"
     )
     parser.add_argument(
-        "--W", type=int, nargs="?", default=512, help="Image width in pixels"
+        "--width", type=int, nargs="?", default=512, help="Image width in pixels"
     )
     parser.add_argument(
         "--scale",
@@ -178,7 +178,7 @@ def main():
         "--seed", type=int, nargs="?", default=0, help="RNG seed for repeatability"
     )
     parser.add_argument(
-        "--ddim_steps", type=int, nargs="?", default=50, help="Number of sampling steps"
+        "--steps", type=int, nargs="?", default=50, help="Number of sampling steps"
     )
     parser.add_argument(
         "--attention-slicing",
