@@ -26,9 +26,7 @@ By default, the pipeline uses the full model and weights which requires a CUDA
 capable GPU with 8GB+ of VRAM. It should take a few seconds to create one image.
 On less powerful GPUs you may need to modify some of the options; see the
 [Examples](#examples) section for more details. If you lack a suitable GPU you
-can set the option `--device cpu` instead. If you are using Docker Desktop and
-the container is terminated you may need to give Docker more resources by
-increasing the CPU, memory, and swap in the Settings -> Resources section.
+can set the option `--device cpu` instead.
 
 ### Huggingface token
 
@@ -194,6 +192,8 @@ Many popular models are supported out-of-the-box:
 
 On systems without enough GPU VRAM, you can try mixing and matching options:
 
+* Give Docker Desktop more resources by increasing the CPU, memory, and swap in
+the Settings -> Resources section if the container is terminated
 * Make images smaller than 512x512 using `--height` and `--width` to decrease
 memory use and increase image creation speed
 * Use `--half` to decrease memory use but slightly decrease image quality
