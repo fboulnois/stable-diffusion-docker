@@ -106,17 +106,16 @@ mask will be diffused and black areas will be kept untouched. Next, to run:
 
 ### Options
 
-Some of the options from [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
-are implemented for compatibility:
+The following are the most common options:
 
 * `--prompt [PROMPT]`: the prompt to render into an image
-* `--n_samples [N_SAMPLES]`: number of images to create per run (default 1)
-* `--n_iter [N_ITER]`: number of times to run pipeline (default 1)
-* `--H [H]`: image height in pixels (default 512, must be divisible by 64)
-* `--W [W]`: image width in pixels (default 512, must be divisible by 64)
+* `--height [HEIGHT]`: image height in pixels (default 512, must be divisible by 64)
+* `--width [WIDTH]`: image width in pixels (default 512, must be divisible by 64)
+* `--iters [ITERS]`: number of times to run pipeline (default 1)
+* `--samples [SAMPLES]`: number of images to create per run (default 1)
 * `--scale [SCALE]`: unconditional guidance scale (default 7.5)
 * `--seed [SEED]`: RNG seed for repeatability (default is a random seed)
-* `--ddim_steps [DDIM_STEPS]`: number of sampling steps (default 50)
+* `--steps [STEPS]`: number of sampling steps (default 50)
 
 Other options:
 
@@ -143,6 +142,19 @@ instead of reading it from a file (default is a file)
 * `--xformers-memory-efficient-attention`: use less memory but require the
 xformers library (default is that xformers is not required)
 
+As the original [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
+script is deprecated and `stable-diffusion-docker` implements newer features
+like `img2img` and `inpaint`, the original `txt2img` options have been renamed
+for easy-of-use and compatibility:
+
+| txt2img | stable-diffusion-docker |
+|---------|-------------------------|
+| `--H` | `--height` |
+| `--W` | `--width` |
+| `--n_iter` | `--iters` |
+| `--n_samples` | `--samples` |
+| `--ddim_steps` | `--steps` |
+
 ## Examples
 
 These commands are both identical:
@@ -166,21 +178,21 @@ Options can be combined:
 
 On systems with <8GB of GPU RAM, you can try mixing and matching options:
 
-* Make images smaller than 512x512 using `--W` and `--H` to decrease memory use
-and increase image creation speed
+* Make images smaller than 512x512 using `--height` and `--width` to decrease
+memory use and increase image creation speed
 * Use `--half` to decrease memory use but slightly decrease image quality
 * Use `--attention-slicing` to decrease memory use but also decrease image
 creation speed
 * Use `--xformers-memory-efficient-attention` to decrease memory use if the
 pipeline and the hardware supports the option
 * Decrease the number of samples and increase the number of iterations with
-`--n_samples` and `--n_iter` to decrease overall memory use
+`--samples` and `--iters` to decrease overall memory use
 * Skip the safety checker with `--skip` to run less code
 
 ```sh
-./build.sh run --W 256 --H 256 --half \
+./build.sh run --height 256 --width 256 --half \
   --attention-slicing --xformers-memory-efficient-attention \
-  --n_samples 1 --n_iter 1 --skip --prompt 'abstract art'
+  --samples 1 --iters 1 --skip --prompt 'abstract art'
 ```
 
 On Windows, if you aren't using WSL2 and instead use MSYS, MinGW, or Git Bash,
