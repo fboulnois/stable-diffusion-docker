@@ -102,7 +102,7 @@ mask will be diffused and black areas will be kept untouched. Next, to run:
   --image image.png --mask mask.png 'Andromeda galaxy in a bottle'
 ```
 
-### Options
+## Options
 
 The following are the most common options:
 
