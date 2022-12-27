@@ -91,7 +91,7 @@ First, copy an image to the `input` folder. Next, to run:
 
 ```sh
 ./build.sh run --model 'stabilityai/stable-diffusion-x4-upscaler' \
-  --image image.png 'A detailed description of the image'
+  --image image.png 'Andromeda galaxy in a bottle'
 ```
 
 ### Diffusion Inpainting (`inpaint`)
@@ -176,7 +176,7 @@ Options can be combined:
 ./build.sh run --scale 7.0 --seed 42 'abstract art'
 ```
 
-On systems with <8GB of GPU RAM, you can try mixing and matching options:
+On systems without enough GPU VRAM, you can try mixing and matching options:
 
 * Make images smaller than 512x512 using `--height` and `--width` to decrease
 memory use and increase image creation speed
