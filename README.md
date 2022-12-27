@@ -109,11 +109,15 @@ mask will be diffused and black areas will be kept untouched. Next, to run:
 The following are the most common options:
 
 * `--prompt [PROMPT]`: the prompt to render into an image
+* `--model [MODEL]`: the model used to render images (default is
+`CompVis/stable-diffusion-v1-4`)
 * `--height [HEIGHT]`: image height in pixels (default 512, must be divisible by 64)
 * `--width [WIDTH]`: image width in pixels (default 512, must be divisible by 64)
 * `--iters [ITERS]`: number of times to run pipeline (default 1)
 * `--samples [SAMPLES]`: number of images to create per run (default 1)
 * `--scale [SCALE]`: unconditional guidance scale (default 7.5)
+* `--scheduler [SCHEDULER]`: override the scheduler used to denoise the image
+(default `None`)
 * `--seed [SEED]`: RNG seed for repeatability (default is a random seed)
 * `--steps [STEPS]`: number of sampling steps (default 50)
 
@@ -128,11 +132,7 @@ Other options:
 (default `None`)
 * `--mask [MASK]`: the input mask to use for diffusion inpainting (default
 `None`)
-* `--model [MODEL]`: the model used to render images (default is
-`CompVis/stable-diffusion-v1-4`)
 * `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
-(default `None`)
-* `--scheduler [SCHEDULER]`: override the scheduler used to denoise the image
 (default `None`)
 * `--skip`: skip safety checker (default is the safety checker is on)
 * `--strength [STRENGTH]`: diffusion strength to apply to the input image
@@ -142,10 +142,10 @@ instead of reading it from a file (default is a file)
 * `--xformers-memory-efficient-attention`: use less memory but require the
 xformers library (default is that xformers is not required)
 
-As the original [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
-script is deprecated and `stable-diffusion-docker` implements newer features
-like `img2img` and `inpaint`, the original `txt2img` options have been renamed
-for easy-of-use and compatibility:
+As some of the original [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
+options are hard to remember and `stable-diffusion-docker` supports newer
+pipelines, features, and models, the original `txt2img` options have been
+renamed for easy-of-use and compatibility:
 
 | txt2img | stable-diffusion-docker |
 |---------|-------------------------|
