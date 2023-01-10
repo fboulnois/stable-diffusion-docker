@@ -1,4 +1,5 @@
 diffusers[torch]==0.11.1
+numpy==1.23.5
 onnxruntime==1.13.1
 safetensors==0.2.6
 torch==1.13.1+cu117
