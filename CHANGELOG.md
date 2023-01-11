@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.25.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.25.0...v1.25.1) - 2023-01-10
+
+### Fixed
+
+* Update safetensors and unstable xformers
+* Add numpy 1.23.5 to fix float errors
+
 ## [v1.25.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.24.0...v1.25.0) - 2022-12-26
 
 ### Added
