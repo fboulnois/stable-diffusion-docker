@@ -1,0 +1,35 @@
+name: Publish
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        default: 'latest'
+        type: string
+env:
+  SD_VERSION: ${{ github.event.inputs.version }}
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout specified tag
+        uses: actions/checkout@v3
+        with:
+          ref: v${{ env.SD_VERSION }}
+      - name: Create empty token file
+        run: |
+          touch token.txt
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push tagged Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/fboulnois/stable-diffusion-docker:latest
+            ghcr.io/fboulnois/stable-diffusion-docker:${{ env.SD_VERSION }}
