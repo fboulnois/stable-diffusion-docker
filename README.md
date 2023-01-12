@@ -20,6 +20,8 @@ container.
 
 ## Before you start
 
+### Minimum specs
+
 By default, the pipeline uses the full model and weights which requires a CUDA
 capable GPU with 8GB+ of VRAM. It should take a few seconds to create one image.
 On less powerful GPUs you may need to modify some of the options; see the
@@ -28,10 +30,12 @@ can set the option `--device cpu` instead. If you are using Docker Desktop and
 the container is terminated you may need to give Docker more resources by
 increasing the CPU, memory, and swap in the Settings -> Resources section.
 
+### Huggingface token
+
 Since it uses the official model, you will need to create a [user access token](https://huggingface.co/docs/hub/security-tokens)
 in your [Huggingface account](https://huggingface.co/settings/tokens). Save the
 user access token in a file called `token.txt` and make sure it is available
-when building the container.
+when building the container. The token content should begin with `hf_...`
 
 ## Quickstart
 
@@ -40,8 +44,8 @@ build the image before it can be run.
 
 ## Build
 
-Make sure your [user access token](#before-you-start) is saved in a file called
-`token.txt`. The token content should begin with `hf_...`
+Make sure your [user access token](#huggingface-token) is saved in a file called
+`token.txt`.
 
 To build:
 
