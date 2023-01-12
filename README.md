@@ -42,6 +42,11 @@ when building the container. The token content should begin with `hf_...`
 The pipeline is managed using a single [`build.sh`](build.sh) script. You must
 build the image before it can be run.
 
+Alternately, you can pull the latest version of `stable-diffusion-docker` from
+the Github Container Registry using `./build.sh pull`, but you will need to use
+the `--token` command line option to specify a valid [user access token](#huggingface-token)
+when using [`./build run`](#run).
+
 ## Build
 
 Make sure your [user access token](#huggingface-token) is saved in a file called
