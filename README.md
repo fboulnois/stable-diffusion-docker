@@ -20,7 +20,7 @@ container.
 
 ## Before you start
 
-### Minimum specs
+### Minimum requirements
 
 By default, the pipeline uses the full model and weights which requires a CUDA
 capable GPU with 8GB+ of VRAM. It should take a few seconds to create one image.
@@ -44,7 +44,7 @@ build the image before it can be run.
 
 Alternately, you can pull the latest version of `stable-diffusion-docker` from
 the Github Container Registry using `./build.sh pull`, but you will need to use
-the `--token` command line option to specify a valid [user access token](#huggingface-token)
+the option `--token` to specify a valid [user access token](#huggingface-token)
 when using [`./build run`](#run).
 
 ## Build
