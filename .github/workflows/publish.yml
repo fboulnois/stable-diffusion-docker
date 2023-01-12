@@ -1,0 +1,28 @@
+name: Publish
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        default: 'latest'
+        type: string
+env:
+  SD_VERSION: ${{ github.event.inputs.version }}
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push tagged Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: v${SD_VERSION}
+          push: true
+          tags:
+            - fboulnois/stable-diffusion-docker:${SD_VERSION}
+            - fboulnois/stable-diffusion-docker:latest
