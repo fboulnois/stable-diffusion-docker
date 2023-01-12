@@ -31,6 +31,11 @@ dev() {
         -it "$CWD"
 }
 
+pull() {
+    docker pull ghcr.io/fboulnois/stable-diffusion-docker
+    docker tag ghcr.io/fboulnois/stable-diffusion-docker "$CWD"
+}
+
 run() {
     set_gpu_arg "$@"
     docker run --rm ${GPU_ARG} \
@@ -66,6 +71,7 @@ case ${1:-build} in
     build) build ;;
     clean) clean ;;
     dev) dev "$@" ;;
+    pull) pull ;;
     run) shift; run "$@" ;;
     test) tests ;;
     *) echo "$0: No command named '$1'" ;;
