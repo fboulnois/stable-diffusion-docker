@@ -32,8 +32,9 @@ dev() {
 }
 
 pull() {
-    docker pull ghcr.io/fboulnois/stable-diffusion-docker
-    docker tag ghcr.io/fboulnois/stable-diffusion-docker "$CWD"
+    GHCR="ghcr.io/fboulnois/stable-diffusion-docker"
+    docker pull "$GHCR"
+    docker tag "$GHCR" "$CWD"
 }
 
 run() {
