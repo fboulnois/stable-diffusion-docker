@@ -1,5 +1,17 @@
 # Changelog
 
+## [v1.26.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.25.1...v1.26.0) - 2023-01-13
+
+### Added
+
+* Support pulling image from ghcr
+* Publish docker pipeline to ghcr
+
+### Changed
+
+* Simplify ghcr publish action
+* Move ghcr url into variable
+
 ## [v1.25.1](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.25.0...v1.25.1) - 2023-01-10
 
 ### Fixed
