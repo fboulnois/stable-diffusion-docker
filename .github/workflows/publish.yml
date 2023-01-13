@@ -4,7 +4,6 @@ on:
     inputs:
       version:
         required: true
-        default: 'latest'
         type: string
 env:
   SD_VERSION: ${{ github.event.inputs.version }}
@@ -31,5 +30,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/fboulnois/stable-diffusion-docker:latest
-            ghcr.io/fboulnois/stable-diffusion-docker:${{ env.SD_VERSION }}
+            ghcr.io/${{ GITHUB_REPOSITORY }}:latest
+            ghcr.io/${{ GITHUB_REPOSITORY }}:${{ env.SD_VERSION }}
