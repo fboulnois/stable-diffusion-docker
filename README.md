@@ -140,10 +140,8 @@ instead of reading it from a file (default is a file)
 * `--xformers-memory-efficient-attention`: use less memory but require the
 xformers library (default is that xformers is not required)
 
-As some of the original [`txt2img.py`](https://github.com/CompVis/stable-diffusion/blob/main/scripts/txt2img.py)
-options are hard to remember and `stable-diffusion-docker` supports newer
-pipelines, features, and models, the original `txt2img` options have been
-renamed for easy-of-use and compatibility:
+Some of the original `txt2img.py` options [have been renamed](https://github.com/fboulnois/stable-diffusion-docker/issues/49)
+for easy-of-use and compatibility with other pipelines:
 
 | txt2img | stable-diffusion-docker |
 |---------|-------------------------|
