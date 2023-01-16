@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.27.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.26.0...v1.27.0) - 2023-01-16
+
+### Added
+
+* Automatically publish new versions
+
+### Fixed
+
+* Update unstable xformers to 0.0.16rc425
+
 ## [v1.26.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.25.1...v1.26.0) - 2023-01-13
 
 ### Added
