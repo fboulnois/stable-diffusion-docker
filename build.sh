@@ -59,6 +59,12 @@ tests() {
         --image "${TEST_IMAGE}" --half --attention-slicing \
         --xformers-memory-efficient-attention \
         --prompt "An impressionist painting of a parakeet eating spaghetti in the desert"
+    run --model "stabilityai/stable-diffusion-2-depth" \
+        --H 768 --W 768 \
+        --image "${TEST_IMAGE}" --attention-slicing \
+        --xformers-memory-efficient-attention \
+        --negative-prompt "bad, ugly, deformed, malformed, mutated, bad anatomy" \
+        --prompt "a toucan"
     run --model "runwayml/stable-diffusion-v1-5" \
         --n_samples 2 --n_iter 2 --seed 42 \
         --scheduler HeunDiscreteScheduler \
