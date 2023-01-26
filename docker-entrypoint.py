@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import argparse, datetime, inspect, os
+import argparse, datetime, inspect, os, warnings
 import numpy as np
 import torch
 from PIL import Image
@@ -85,12 +85,14 @@ def stable_diffusion_pipeline(p):
 
     print("load pipeline start:", iso_date_time(), flush=True)
 
-    pipeline = p.diffuser.from_pretrained(
-        p.model,
-        torch_dtype=p.dtype,
-        revision=p.revision,
-        use_auth_token=p.token,
-    ).to(p.device)
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", category=FutureWarning)
+        pipeline = p.diffuser.from_pretrained(
+            p.model,
+            torch_dtype=p.dtype,
+            revision=p.revision,
+            use_auth_token=p.token,
+        ).to(p.device)
 
     if p.scheduler is not None:
         scheduler = getattr(schedulers, p.scheduler)
