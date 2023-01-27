@@ -76,6 +76,15 @@ First, copy an image to the `input` folder. Next, to run:
 ./build.sh run --image image.png 'Andromeda galaxy in a bottle'
 ```
 
+### Depth-Guided Diffusion (`depth2img`)
+
+First, copy an image to the `input` folder. Next, to run:
+
+```sh
+./build.sh run --model 'stabilityai/stable-diffusion-2-depth' \
+  --image image.png 'A detailed description of the objects to change'
+```
+
 ### Image Upscaling (`upscale4x`)
 
 First, copy an image to the `input` folder. Next, to run:
