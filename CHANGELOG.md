@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.28.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.27.0...v1.28.0) - 2023-01-26
+
+### Added
+
+* Upgrade diffusers to 0.12.0
+
+### Fixed
+
+* Suppress CLIPFeatureExtractor warning
+
 ## [v1.27.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.26.0...v1.27.0) - 2023-01-16
 
 ### Added
