@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.29.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.28.0...v1.29.0) - 2023-01-26
+
+### Added
+
+* Add test for depth-guided diffusion
+* Add depth-guided stable diffusion
+
 ## [v1.28.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.27.0...v1.28.0) - 2023-01-26
 
 ### Added
