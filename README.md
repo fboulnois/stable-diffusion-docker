@@ -8,15 +8,15 @@ container.
 ./build.sh run 'An impressionist painting of a parakeet eating spaghetti in the desert'
 ```
 
-![An impressionist painting of a parakeet eating spaghetti in the desert 1](img/An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s1.png)
-![An impressionist painting of a parakeet eating spaghetti in the desert 2](img/An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s2.png)
+![An impressionist painting of a parakeet eating spaghetti in the desert 1](https://raw.githubusercontent.com/fboulnois/repository-assets/main/assets/stable-diffusion-docker/An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s1.png)
+![An impressionist painting of a parakeet eating spaghetti in the desert 2](https://raw.githubusercontent.com/fboulnois/repository-assets/main/assets/stable-diffusion-docker/An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s2.png)
 
 ```sh
-./build.sh run --image parakeet_eating_spaghetti.png --strength 0.6 'Abstract art'
+./build.sh run --image parakeet_eating_spaghetti.png --strength 0.6 'Bouquet of roses'
 ```
 
-![Abstract art 1](img/Abstract_art_s1.png)
-![Abstract art 2](img/Abstract_art_s2.png)
+![Bouquet of roses 1](https://raw.githubusercontent.com/fboulnois/repository-assets/main/assets/stable-diffusion-docker/Bouquet_of_roses_s1.png)
+![Bouquet of roses 2](https://raw.githubusercontent.com/fboulnois/repository-assets/main/assets/stable-diffusion-docker/Bouquet_of_roses_s2.png)
 
 ## Before you start
 
