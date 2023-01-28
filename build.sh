@@ -60,7 +60,7 @@ tests() {
         --xformers-memory-efficient-attention \
         --prompt "An impressionist painting of a parakeet eating spaghetti in the desert"
     run --model "stabilityai/stable-diffusion-2-depth" \
-        --H 768 --W 768 \
+        --height 768 --width 768 \
         --image "${TEST_IMAGE}" --attention-slicing \
         --xformers-memory-efficient-attention \
         --negative-prompt "bad, ugly, deformed, malformed, mutated, bad anatomy" \
