@@ -1,5 +1,22 @@
 # Changelog
 
+## [v1.30.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.29.0...v1.30.0) - 2023-01-28
+
+### Added
+
+* Update diffusers to 0.12.1
+
+### Changed
+
+* Reorder arguments alphabetically
+* Rename option names in tests
+* Rename certain options for ease-of-use
+
+### Fixed
+
+* Download test image since img folder is gone
+* Rename option names in depth diffusion test
+
 ## [v1.29.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.28.0...v1.29.0) - 2023-01-26
 
 ### Added
