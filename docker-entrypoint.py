@@ -46,13 +46,8 @@ def remove_unused_args(p):
 
 def stable_diffusion_pipeline(p):
     p.dtype = torch.float16 if p.half else torch.float32
-
-    if p.device == "cpu":
-        p.diffuser = OnnxStableDiffusionPipeline
-        p.revision = "onnx"
-    else:
-        p.diffuser = StableDiffusionPipeline
-        p.revision = "fp16" if p.half else "main"
+    p.diffuser = StableDiffusionPipeline
+    p.revision = "fp16" if p.half else "main"
 
     models = argparse.Namespace(
         **{
@@ -61,9 +56,7 @@ def stable_diffusion_pipeline(p):
         }
     )
     if p.image is not None:
-        if p.revision == "onnx":
-            p.diffuser = OnnxStableDiffusionImg2ImgPipeline
-        elif p.model in models.depth2img:
+        if p.model in models.depth2img:
             p.diffuser = StableDiffusionDepth2ImgPipeline
         elif p.model in models.upscalers:
             p.diffuser = StableDiffusionUpscalePipeline
@@ -72,10 +65,7 @@ def stable_diffusion_pipeline(p):
         p.image = load_image(p.image)
 
     if p.mask is not None:
-        if p.revision == "onnx":
-            p.diffuser = OnnxStableDiffusionInpaintPipeline
-        else:
-            p.diffuser = StableDiffusionInpaintPipeline
+        p.diffuser = StableDiffusionInpaintPipeline
         p.mask = load_image(p.mask)
 
     if p.token is None:
@@ -186,7 +176,7 @@ def main():
         "--model",
         type=str,
         nargs="?",
-        default="CompVis/stable-diffusion-v1-4",
+        default="stabilityai/stable-diffusion-2-1",
         help="The model used to render images",
     )
     parser.add_argument(
