@@ -48,7 +48,7 @@ run() {
 
 tests() {
     BASE_URL="https://raw.githubusercontent.com/fboulnois/repository-assets/main/assets/stable-diffusion-docker"
-    TEST_IMAGE="An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_s1.png"
+    TEST_IMAGE="An_impressionist_painting_of_a_parakeet_eating_spaghetti_in_the_desert_full.png"
     curl -sL "${BASE_URL}/${TEST_IMAGE}" > "$PWD/input/${TEST_IMAGE}"
     run --skip --height 512 --width 640 "abstract art"
     run --device cpu --image "${TEST_IMAGE}" --strength 0.6 "abstract art"
