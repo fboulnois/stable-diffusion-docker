@@ -60,6 +60,8 @@ To build:
 
 ### Text-to-Image (`txt2img`)
 
+Create an image from a text prompt.
+
 To run:
 
 ```sh
@@ -68,6 +70,8 @@ To run:
 
 ### Image-to-Image (`img2img`)
 
+Create an image from an existing image and a text prompt.
+
 First, copy an image to the `input` folder. Next, to run:
 
 ```sh
@@ -75,6 +79,8 @@ First, copy an image to the `input` folder. Next, to run:
 ```
 
 ### Depth-Guided Diffusion (`depth2img`)
+
+Modify an existing image with its depth map and a text prompt.
 
 First, copy an image to the `input` folder. Next, to run:
 
@@ -85,6 +91,8 @@ First, copy an image to the `input` folder. Next, to run:
 
 ### Instruct Pix2Pix (`pix2pix`)
 
+Modify an existing image with a text prompt.
+
 First, copy an image to the `input` folder. Next, to run:
 
 ```sh
@@ -94,6 +102,8 @@ First, copy an image to the `input` folder. Next, to run:
 
 ### Image Upscaling (`upscale4x`)
 
+Create a high resolution image from an existing image with a text prompt.
+
 First, copy an image to the `input` folder. Next, to run:
 
 ```sh
@@ -102,6 +112,8 @@ First, copy an image to the `input` folder. Next, to run:
 ```
 
 ### Diffusion Inpainting (`inpaint`)
+
+Modify specific areas of an existing image with an image mask and a text prompt.
 
 First, copy an image and an image mask to the `input` folder. White areas of the
 mask will be diffused and black areas will be kept untouched. Next, to run:
