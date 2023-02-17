@@ -83,6 +83,15 @@ First, copy an image to the `input` folder. Next, to run:
   --image image.png 'A detailed description of the objects to change'
 ```
 
+### Instruct Pix2Pix (`pix2pix`)
+
+First, copy an image to the `input` folder. Next, to run:
+
+```sh
+./build.sh run --model 'timbrooks/instruct-pix2pix' \
+  --image image.png 'A detailed description of the objects to change'
+```
+
 ### Image Upscaling (`upscale4x`)
 
 First, copy an image to the `input` folder. Next, to run:
@@ -128,6 +137,8 @@ Other options:
 * `--half`: use float16 tensors instead of float32 (default `float32`)
 * `--image [IMAGE]`: the input image to use for image-to-image diffusion
 (default `None`)
+* `--image-scale [IMAGE_SCALE]`: how closely the image should follow the
+original image (default `None`)
 * `--mask [MASK]`: the input mask to use for diffusion inpainting (default
 `None`)
 * `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
