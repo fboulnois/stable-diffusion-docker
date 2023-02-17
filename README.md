@@ -122,7 +122,7 @@ The following are the most common options:
 * `--width [WIDTH]`: image width in pixels (default 512, must be divisible by 64)
 * `--iters [ITERS]`: number of times to run pipeline (default 1)
 * `--samples [SAMPLES]`: number of images to create per run (default 1)
-* `--scale [SCALE]`: unconditional guidance scale (default 7.5)
+* `--scale [SCALE]`: how closely the image should follow the prompt (default 7.5)
 * `--scheduler [SCHEDULER]`: override the scheduler used to denoise the image
 (default `None`)
 * `--seed [SEED]`: RNG seed for repeatability (default is a random seed)
