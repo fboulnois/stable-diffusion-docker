@@ -66,6 +66,12 @@ tests() {
         --xformers-memory-efficient-attention \
         --negative-prompt "bad, ugly, deformed, malformed, mutated, bad anatomy" \
         --prompt "a toucan"
+    run --model "timbrooks/instruct-pix2pix" \
+        --scale 7.0 --image-scale 2.0 \
+        --image "${TEST_IMAGE}" --attention-slicing \
+        --xformers-memory-efficient-attention \
+        --negative-prompt "bad, ugly, deformed, malformed, mutated, bad anatomy" \
+        --prompt "replace the sky with bricks"
     run --model "runwayml/stable-diffusion-v1-5" \
         --samples 2 --iters 2 --seed 42 \
         --scheduler HeunDiscreteScheduler \
