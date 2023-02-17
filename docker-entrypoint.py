@@ -11,6 +11,7 @@ from diffusers import (
     StableDiffusionPipeline,
     StableDiffusionImg2ImgPipeline,
     StableDiffusionInpaintPipeline,
+    StableDiffusionInstructPix2PixPipeline,
     StableDiffusionUpscalePipeline,
     schedulers,
 )
@@ -38,6 +39,7 @@ def remove_unused_args(p):
         "num_images_per_prompt": p.samples,
         "num_inference_steps": p.steps,
         "guidance_scale": p.scale,
+        "image_guidance_scale": p.image_scale,
         "strength": p.strength,
         "generator": p.generator,
     }
@@ -57,6 +59,7 @@ def stable_diffusion_pipeline(p):
     models = argparse.Namespace(
         **{
             "depth2img": ["stabilityai/stable-diffusion-2-depth"],
+            "pix2pix": ["timbrooks/instruct-pix2pix"],
             "upscalers": ["stabilityai/stable-diffusion-x4-upscaler"],
         }
     )
@@ -65,6 +68,8 @@ def stable_diffusion_pipeline(p):
             p.diffuser = OnnxStableDiffusionImg2ImgPipeline
         elif p.model in models.depth2img:
             p.diffuser = StableDiffusionDepth2ImgPipeline
+        elif p.model in models.pix2pix:
+            p.diffuser = StableDiffusionInstructPix2PixPipeline
         elif p.model in models.upscalers:
             p.diffuser = StableDiffusionUpscalePipeline
         else:
@@ -168,6 +173,12 @@ def main():
         type=str,
         nargs="?",
         help="The input image to use for image-to-image diffusion",
+    )
+    parser.add_argument(
+        "--image-scale",
+        type=float,
+        nargs="?",
+        help="How closely the image should follow the original image",
     )
     parser.add_argument(
         "--iters",
