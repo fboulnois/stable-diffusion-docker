@@ -221,7 +221,7 @@ def main():
         type=float,
         nargs="?",
         default=7.5,
-        help="Classifier free guidance scale",
+        help="How closely the image should follow the prompt",
     )
     parser.add_argument(
         "--scheduler",
