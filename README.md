@@ -26,7 +26,7 @@ By default, the pipeline uses the full model and weights which requires a CUDA
 capable GPU with 8GB+ of VRAM. It should take a few seconds to create one image.
 On less powerful GPUs you may need to modify some of the options; see the
 [Examples](#examples) section for more details. If you lack a suitable GPU you
-can set the option `--device cpu` instead.
+can set the options `--device cpu` and `--onnx` instead.
 
 ### Huggingface token
 
@@ -155,6 +155,7 @@ original image (default `None`)
 `None`)
 * `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
 (default `None`)
+* `--onnx`: use the onnx runtime for inference (default is off)
 * `--skip`: skip safety checker (default is the safety checker is on)
 * `--strength [STRENGTH]`: diffusion strength to apply to the input image
 (default 0.75)
