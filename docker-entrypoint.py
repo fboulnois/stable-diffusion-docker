@@ -49,7 +49,7 @@ def remove_unused_args(p):
 def stable_diffusion_pipeline(p):
     p.dtype = torch.float16 if p.half else torch.float32
 
-    if p.device == "cpu":
+    if p.onnx:
         p.diffuser = OnnxStableDiffusionPipeline
         p.revision = "onnx"
     else:
@@ -63,6 +63,7 @@ def stable_diffusion_pipeline(p):
             "upscalers": ["stabilityai/stable-diffusion-x4-upscaler"],
         }
     )
+
     if p.image is not None:
         if p.revision == "onnx":
             p.diffuser = OnnxStableDiffusionImg2ImgPipeline
@@ -205,6 +206,14 @@ def main():
         type=str,
         nargs="?",
         help="The prompt to not render into an image",
+    )
+    parser.add_argument(
+        "--onnx",
+        type=bool,
+        nargs="?",
+        const=True,
+        default=False,
+        help="Use the onnx runtime for inference",
     )
     parser.add_argument(
         "--prompt", type=str, nargs="?", help="The prompt to render into an image"
