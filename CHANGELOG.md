@@ -1,5 +1,15 @@
 # Changelog
 
+## [v1.33.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.32.0...v1.33.0) - 2023-02-25
+
+### Added
+
+* Update diffusers to 0.13.1
+
+### Fixed
+
+* Ensure booleans do not consume other args
+
 ## [v1.32.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.31.0...v1.32.0) - 2023-02-20
 
 ### Added
