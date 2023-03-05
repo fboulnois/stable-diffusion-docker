@@ -145,7 +145,7 @@ def main():
     parser = argparse.ArgumentParser(description="Create images from a text prompt.")
     parser.add_argument(
         "--attention-slicing",
-        action='store_true',
+        action="store_true",
         help="Use less memory at the expense of inference speed",
     )
     parser.add_argument(
@@ -157,7 +157,7 @@ def main():
     )
     parser.add_argument(
         "--half",
-        action='store_true',
+        action="store_true",
         help="Use float16 (half-sized) tensors instead of float32",
     )
     parser.add_argument(
@@ -203,7 +203,7 @@ def main():
     )
     parser.add_argument(
         "--onnx",
-        action='store_true',
+        action="store_true",
         help="Use the onnx runtime for inference",
     )
     parser.add_argument(
@@ -234,7 +234,7 @@ def main():
     )
     parser.add_argument(
         "--skip",
-        action='store_true',
+        action="store_true",
         help="Skip the safety checker",
     )
     parser.add_argument(
@@ -254,7 +254,7 @@ def main():
     )
     parser.add_argument(
         "--xformers-memory-efficient-attention",
-        action='store_true',
+        action="store_true",
         help="Use less memory but require the xformers library",
     )
     parser.add_argument(
