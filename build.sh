@@ -72,6 +72,9 @@ tests() {
         --xformers-memory-efficient-attention \
         --negative-prompt "bad, ugly, deformed, malformed, mutated, bad anatomy" \
         --prompt "replace the sky with bricks"
+    run --model "dreamlike-art/dreamlike-diffusion-1.0" \
+        --skip --vae-tiling --xformers-memory-efficient-attention \
+        --height 1024 --width 1024 "abstract art"
     run --model "runwayml/stable-diffusion-v1-5" \
         --samples 2 --iters 2 --seed 42 \
         --scheduler HeunDiscreteScheduler \
