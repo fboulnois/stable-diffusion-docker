@@ -121,6 +121,9 @@ def stable_diffusion_pipeline(p):
     if p.xformers_memory_efficient_attention:
         pipeline.enable_xformers_memory_efficient_attention()
 
+    if p.vae_tiling:
+        pipeline.vae.enable_tiling()
+
     p.pipeline = pipeline
 
     print("loaded models after:", iso_date_time(), flush=True)
@@ -248,6 +251,11 @@ def main():
     )
     parser.add_argument(
         "--token", type=str, nargs="?", help="Huggingface user access token"
+    )
+    parser.add_argument(
+        "--vae-tiling",
+        action="store_true",
+        help="Use less memory when generating ultra-high resolution images",
     )
     parser.add_argument(
         "--width", type=int, nargs="?", default=512, help="Image width in pixels"
