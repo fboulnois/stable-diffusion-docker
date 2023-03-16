@@ -142,8 +142,8 @@ The following are the most common options:
 
 Other options:
 
-* `--attention-slicing`: use less memory at the expense of inference speed
-(default is no attention slicing)
+* `--attention-slicing`: use less memory but decrease inference speed (default
+is no attention slicing)
 * `--device [DEVICE]`: the cpu or cuda device to use to render images (default
 `cuda`)
 * `--half`: use float16 tensors instead of float32 (default `float32`)
@@ -161,6 +161,8 @@ original image (default `None`)
 (default 0.75)
 * `--token [TOKEN]`: specify a Huggingface user access token at the command line
 instead of reading it from a file (default is a file)
+* `--vae-tiling`: use less memory when generating ultra-high resolution images
+but massively decrease inference speed (default is no tiling)
 * `--xformers-memory-efficient-attention`: use less memory but require the
 xformers library (default is that xformers is not required)
 
