@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.34.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.33.0...v1.34.0) - 2023-03-17
+
+### Added
+
+* Add test for custom model and vae tiling
+* Add vae tiling for high resolution images
+* Update diffusers, onnx, and safetensors
+
 ## [v1.33.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.32.0...v1.33.0) - 2023-02-25
 
 ### Added
