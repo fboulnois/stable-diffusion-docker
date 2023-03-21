@@ -144,7 +144,7 @@ def stable_diffusion_inference(p):
     print("completed pipeline:", iso_date_time(), flush=True)
 
 
-def main():
+def parse_args():
     parser = argparse.ArgumentParser(description="Create images from a text prompt.")
     parser.add_argument(
         "--attention-slicing",
@@ -278,6 +278,10 @@ def main():
     if args.prompt0 is not None:
         args.prompt = args.prompt0
 
+    return args
+
+def main():
+    args = parse_args()
     pipeline = stable_diffusion_pipeline(args)
     stable_diffusion_inference(pipeline)
 
