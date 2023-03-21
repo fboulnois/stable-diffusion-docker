@@ -133,15 +133,19 @@ def stable_diffusion_pipeline(p):
 
 def stable_diffusion_inference(p):
     prefix = p.prompt.replace(" ", "_")[:170]
+    img_paths = []
     for j in range(p.iters):
         result = p.pipeline(**remove_unused_args(p))
 
         for i, img in enumerate(result.images):
             idx = j * p.samples + i + 1
             out = f"{prefix}__steps_{p.steps}__scale_{p.scale:.2f}__seed_{p.seed}__n_{idx}.png"
-            img.save(os.path.join("output", out))
+            out_path = os.path.join("output", out)
+            img.save(out_path)
+            img_paths.append(out_path)
 
     print("completed pipeline:", iso_date_time(), flush=True)
+    return img_paths
 
 
 def main():
@@ -279,7 +283,10 @@ def main():
         args.prompt = args.prompt0
 
     pipeline = stable_diffusion_pipeline(args)
-    stable_diffusion_inference(pipeline)
+    img_paths = stable_diffusion_inference(pipeline)
+
+    for img_path in img_paths:
+        print("generated:", img_path, flush=True)
 
 
 if __name__ == "__main__":
