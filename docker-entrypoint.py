@@ -132,7 +132,7 @@ def stable_diffusion_pipeline(p):
 
 
 def stable_diffusion_inference(p):
-    prefix = p.prompt.replace(" ", "_")[:170]
+    prefix = sanitize_filename(p.prompt)
     img_paths = []
     for j in range(p.iters):
         result = p.pipeline(**remove_unused_args(p))
@@ -146,6 +146,17 @@ def stable_diffusion_inference(p):
 
     print("completed pipeline:", iso_date_time(), flush=True)
     return img_paths
+
+def sanitize_filename(fn):
+    fn = fn[:170]
+    valid_chars = "-_.()"
+    out = ""
+    for c in fn:
+        if str.isalpha(c) or str.isdigit(c) or (c in valid_chars):
+            out += c
+        else:
+            out += "_"
+    return out
 
 
 def main():
