@@ -147,8 +147,8 @@ def stable_diffusion_inference(p):
     print("completed pipeline:", iso_date_time(), flush=True)
     return img_paths
 
-def sanitize_filename(fn):
-    fn = fn[:170]
+def sanitize_filename(fn, encoding='utf-8'):
+    fn = fn.encode(encoding)[:170].decode(encoding, 'ignore')
     valid_chars = "-_.()"
     out = ""
     for c in fn:
