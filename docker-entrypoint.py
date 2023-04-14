@@ -122,8 +122,11 @@ def stable_diffusion_pipeline(p):
     if p.xformers_memory_efficient_attention:
         pipeline.enable_xformers_memory_efficient_attention()
 
+    if p.vae_slicing:
+        pipeline.enable_vae_slicing()
+
     if p.vae_tiling:
-        pipeline.vae.enable_tiling()
+        pipeline.enable_vae_tiling()
 
     p.pipeline = pipeline
 
@@ -259,9 +262,14 @@ def main():
         "--token", type=str, nargs="?", help="Huggingface user access token"
     )
     parser.add_argument(
+        "--vae-slicing",
+        action="store_true",
+        help="Use less memory when creating large batches of images",
+    )
+    parser.add_argument(
         "--vae-tiling",
         action="store_true",
-        help="Use less memory when generating ultra-high resolution images",
+        help="Use less memory when creating ultra-high resolution images",
     )
     parser.add_argument(
         "--width", type=int, nargs="?", default=512, help="Image width in pixels"
