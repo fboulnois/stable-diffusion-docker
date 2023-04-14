@@ -78,7 +78,7 @@ tests() {
     run --model "runwayml/stable-diffusion-v1-5" \
         --samples 2 --iters 2 --seed 42 \
         --scheduler HeunDiscreteScheduler \
-        --scale 7.5 --steps 80 --attention-slicing \
+        --scale 7.5 --steps 80 --vae-slicing --attention-slicing \
         --half --skip --negative-prompt "red roses" \
         --prompt "bouquet of roses"
 }
