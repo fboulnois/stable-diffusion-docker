@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import argparse, datetime, inspect, os, warnings
+import argparse, datetime, inspect, os, re, warnings
 import numpy as np
 import torch
 from PIL import Image
@@ -132,7 +132,12 @@ def stable_diffusion_pipeline(p):
 
 
 def stable_diffusion_inference(p):
-    prefix = p.prompt.replace(" ", "_")[:170]
+    prefix = (
+        re.sub(r"[\\/:*?\"<>|]", "", p.prompt)
+        .replace(" ", "_")
+        .encode("utf-8")[:170]
+        .decode("utf-8", "ignore")
+    )
     for j in range(p.iters):
         result = p.pipeline(**remove_unused_args(p))
 
