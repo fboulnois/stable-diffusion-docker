@@ -66,6 +66,8 @@ tests() {
         --xformers-memory-efficient-attention \
         --negative-prompt "bad, ugly, deformed, malformed, mutated, bad anatomy" \
         --prompt "a toucan"
+    run --model "stabilityai/stable-diffusion-2-1-unclip" --image "${TEST_IMAGE}" \
+        --prompt "An impressionist painting of a parakeet eating spaghetti in the desert"
     run --model "timbrooks/instruct-pix2pix" \
         --scale 7.0 --image-scale 2.0 \
         --image "${TEST_IMAGE}" --attention-slicing \
