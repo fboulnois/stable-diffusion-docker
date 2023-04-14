@@ -100,7 +100,8 @@ def stable_diffusion_pipeline(p):
     print("load pipeline start:", iso_date_time(), flush=True)
 
     with warnings.catch_warnings():
-        warnings.filterwarnings("ignore", category=FutureWarning)
+        for c in [UserWarning, FutureWarning]:
+            warnings.filterwarnings("ignore", category=c)
         pipeline = p.diffuser.from_pretrained(
             p.model,
             torch_dtype=p.dtype,
