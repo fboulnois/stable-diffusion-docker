@@ -13,6 +13,7 @@ from diffusers import (
     StableDiffusionInpaintPipeline,
     StableDiffusionInstructPix2PixPipeline,
     StableDiffusionUpscalePipeline,
+    StableUnCLIPImg2ImgPipeline,
     schedulers,
 )
 
@@ -60,6 +61,10 @@ def stable_diffusion_pipeline(p):
         **{
             "depth2img": ["stabilityai/stable-diffusion-2-depth"],
             "pix2pix": ["timbrooks/instruct-pix2pix"],
+            "unclip": [
+                "stabilityai/stable-diffusion-2-1-unclip",
+                "stabilityai/stable-diffusion-2-1-unclip-small",
+            ],
             "upscalers": ["stabilityai/stable-diffusion-x4-upscaler"],
         }
     )
@@ -71,6 +76,8 @@ def stable_diffusion_pipeline(p):
             p.diffuser = StableDiffusionDepth2ImgPipeline
         elif p.model in models.pix2pix:
             p.diffuser = StableDiffusionInstructPix2PixPipeline
+        elif p.model in models.unclip:
+            p.diffuser = StableUnCLIPImg2ImgPipeline
         elif p.model in models.upscalers:
             p.diffuser = StableDiffusionUpscalePipeline
         else:
