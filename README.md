@@ -161,8 +161,10 @@ original image (default `None`)
 (default 0.75)
 * `--token [TOKEN]`: specify a Huggingface user access token at the command line
 instead of reading it from a file (default is a file)
-* `--vae-tiling`: use less memory when generating ultra-high resolution images
-but massively decrease inference speed (default is no tiling)
+* `--vae-slicing`: use less memory when creating large batches of images
+(default is no vae slicing)
+* `--vae-tiling`: use less memory when creating ultra-high resolution images but
+massively decrease inference speed (default is no vae tiling)
 * `--xformers-memory-efficient-attention`: use less memory but require the
 xformers library (default is that xformers is not required)
 
