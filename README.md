@@ -100,6 +100,17 @@ First, copy an image to the `input` folder. Next, to run:
   --image image.png 'A detailed description of the objects to change'
 ```
 
+### Stable UnCLIP Variations (`unclip`)
+
+Create different versions of an image with a text prompt.
+
+First, copy an image to the `input` folder. Next, to run:
+
+```sh
+./build.sh run --model 'stabilityai/stable-diffusion-2-1-unclip-small' \
+  --image image.png 'A detailed description of the image'
+```
+
 ### Image Upscaling (`upscale4x`)
 
 Create a high resolution image from an existing image with a text prompt.
