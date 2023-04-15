@@ -1,5 +1,21 @@
 # Changelog
 
+## [v1.35.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.34.0...v1.35.0) - 2023-04-15
+
+### Added
+
+* Add test for stable unclip variations
+* Add stable unclip variations pipeline
+* Add vae slicing to existing test
+* Add vae slicing for image batches
+* Add filename normalization to existing test
+* Update torch to v2.0.0
+
+### Fixed
+
+* Temporarily suppress pipeline UserWarning
+* Sanitize and truncate filenames
+
 ## [v1.34.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.33.0...v1.34.0) - 2023-03-17
 
 ### Added
