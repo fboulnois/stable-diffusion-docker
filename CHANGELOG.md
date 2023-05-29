@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.37.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.36.0...v1.37.0) - 2023-05-29
+
+### Added
+
+* Update xformers to 0.0.20
+
 ## [v1.36.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.35.0...v1.36.0) - 2023-05-19
 
 ### Added
