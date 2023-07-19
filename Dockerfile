@@ -1,4 +1,4 @@
-FROM python:3.10-slim-bullseye
+FROM python:3.11-slim-bullseye
 
 RUN rm -rf /usr/local/cuda/lib64/stubs
 
