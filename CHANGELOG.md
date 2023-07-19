@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.39.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.38.0...v1.39.0) - 2023-07-19
+
+### Added
+
+* Update diffusers to 0.18.2
+* Update python to 3.11
+
 ## [v1.38.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.37.0...v1.38.0) - 2023-06-20
 
 ### Added
