@@ -142,20 +142,35 @@ def stable_diffusion_pipeline(p):
     return p
 
 
-def stable_diffusion_inference(p):
+def generate_default_output_filename(pipeline):
     prefix = (
-        re.sub(r"[\\/:*?\"<>|]", "", p.prompt)
+        re.sub(r"[\\/:*?\"<>|]", "", pipeline.prompt)
         .replace(" ", "_")
         .encode("utf-8")[:170]
         .decode("utf-8", "ignore")
     )
+    return f"{prefix}__steps_{pipeline.steps}__scale_{pipeline.scale:.2f}__seed_{pipeline.seed}.png"
+
+
+def add_iteration_to_filename(filename, total_iterations, cur_iteration, samples_per_iteration, cur_sample):
+
+    if total_iterations != 1 or samples_per_iteration != 1:
+        idx = f"__n_{cur_iteration * samples_per_iteration + cur_sample + 1}"
+    else:
+        idx = ""
+
+    parts = os.path.splitext(filename)
+    return  f"{parts[0]}{idx}{parts[1]}"
+
+
+def stable_diffusion_inference(p, output_filename):
     for j in range(p.iters):
         result = p.pipeline(**remove_unused_args(p))
 
         for i, img in enumerate(result.images):
-            idx = j * p.samples + i + 1
-            out = f"{prefix}__steps_{p.steps}__scale_{p.scale:.2f}__seed_{p.seed}__n_{idx}.png"
-            img.save(os.path.join("output", out))
+            current_filename = add_iteration_to_filename(output_filename, p.iters, j, p.samples, i)
+            img.save(os.path.join("output", current_filename))
+            print("output file:", current_filename, flush=True)
 
     print("completed pipeline:", iso_date_time(), flush=True)
 
@@ -224,6 +239,12 @@ def main():
         "--onnx",
         action="store_true",
         help="Use the onnx runtime for inference",
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        nargs="?",
+        help="The filename to output to (only .png files are supported)",
     )
     parser.add_argument(
         "--prompt", type=str, nargs="?", help="The prompt to render into an image"
@@ -300,7 +321,14 @@ def main():
         args.prompt = args.prompt0
 
     pipeline = stable_diffusion_pipeline(args)
-    stable_diffusion_inference(pipeline)
+
+    if args.output is None:
+        args.output = generate_default_output_filename(pipeline)
+
+    if os.path.splitext(args.output)[1] != ".png":
+        raise Exception("only .png output filenames are supported")
+
+    stable_diffusion_inference(pipeline, args.output)
 
 
 if __name__ == "__main__":
