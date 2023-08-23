@@ -4,16 +4,13 @@ import numpy as np
 import torch
 from PIL import Image
 from diffusers import (
+    AutoPipelineForText2Image,
+    AutoPipelineForImage2Image,
+    AutoPipelineForInpainting,
+    DiffusionPipeline,
     OnnxStableDiffusionPipeline,
     OnnxStableDiffusionInpaintPipeline,
     OnnxStableDiffusionImg2ImgPipeline,
-    StableDiffusionDepth2ImgPipeline,
-    StableDiffusionPipeline,
-    StableDiffusionImg2ImgPipeline,
-    StableDiffusionInpaintPipeline,
-    StableDiffusionInstructPix2PixPipeline,
-    StableDiffusionUpscalePipeline,
-    StableUnCLIPImg2ImgPipeline,
     schedulers,
 )
 
@@ -54,41 +51,34 @@ def stable_diffusion_pipeline(p):
         p.diffuser = OnnxStableDiffusionPipeline
         p.revision = "onnx"
     else:
-        p.diffuser = StableDiffusionPipeline
+        p.diffuser = DiffusionPipeline
         p.revision = "fp16" if p.half else "main"
 
-    models = argparse.Namespace(
+    autos = argparse.Namespace(
         **{
-            "depth2img": ["stabilityai/stable-diffusion-2-depth"],
-            "pix2pix": ["timbrooks/instruct-pix2pix"],
-            "unclip": [
-                "stabilityai/stable-diffusion-2-1-unclip",
-                "stabilityai/stable-diffusion-2-1-unclip-small",
-            ],
-            "upscalers": ["stabilityai/stable-diffusion-x4-upscaler"],
+            "sd": ["StableDiffusionPipeline"],
+            "sdxl": ["StableDiffusionXLPipeline"],
         }
     )
+
+    config = DiffusionPipeline.load_config(p.model)
+    is_auto_pipeline = config["_class_name"] in [autos.sd, autos.sdxl]
+
+    if is_auto_pipeline:
+        p.diffuser = AutoPipelineForText2Image
 
     if p.image is not None:
         if p.revision == "onnx":
             p.diffuser = OnnxStableDiffusionImg2ImgPipeline
-        elif p.model in models.depth2img:
-            p.diffuser = StableDiffusionDepth2ImgPipeline
-        elif p.model in models.pix2pix:
-            p.diffuser = StableDiffusionInstructPix2PixPipeline
-        elif p.model in models.unclip:
-            p.diffuser = StableUnCLIPImg2ImgPipeline
-        elif p.model in models.upscalers:
-            p.diffuser = StableDiffusionUpscalePipeline
-        else:
-            p.diffuser = StableDiffusionImg2ImgPipeline
+        elif is_auto_pipeline:
+            p.diffuser = AutoPipelineForImage2Image
         p.image = load_image(p.image)
 
     if p.mask is not None:
         if p.revision == "onnx":
             p.diffuser = OnnxStableDiffusionInpaintPipeline
-        else:
-            p.diffuser = StableDiffusionInpaintPipeline
+        elif is_auto_pipeline:
+            p.diffuser = AutoPipelineForInpainting
         p.mask = load_image(p.mask)
 
     if p.token is None:
