@@ -56,6 +56,9 @@ tests() {
         --skip --height 768 --width 768 "abstract art"
     run --model "stabilityai/stable-diffusion-2-1" \
         --skip --height 768 --width 768 "abstract art"
+    run --model "stabilityai/stable-diffusion-xl-base-1.0" \
+        --skip --xformers-memory-efficient-attention \
+        --prompt "abstract art"
     run --model "stabilityai/stable-diffusion-x4-upscaler" \
         --image "${TEST_IMAGE}" --half --attention-slicing \
         --xformers-memory-efficient-attention \
