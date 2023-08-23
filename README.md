@@ -219,6 +219,7 @@ Many popular models are supported out-of-the-box:
 | [Stable Diffusion 1.5](https://huggingface.co/runwayml/stable-diffusion-v1-5) | `'runwayml/stable-diffusion-v1-5'` |
 | [Stable Diffusion 2.0](https://huggingface.co/stabilityai/stable-diffusion-2) | `'stabilityai/stable-diffusion-2'` |
 | [Stable Diffusion 2.1](https://huggingface.co/stabilityai/stable-diffusion-2-1) | `'stabilityai/stable-diffusion-2-1'` |
+| [Stable Diffusion XL](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0) | `'stabilityai/stable-diffusion-xl-base-1.0'` |
 | [OpenJourney 1.0](https://huggingface.co/prompthero/openjourney) | `'prompthero/openjourney'` |
 | [Dreamlike Diffusion 1.0](https://huggingface.co/dreamlike-art/dreamlike-diffusion-1.0) | `'dreamlike-art/dreamlike-diffusion-1.0'` |
 | [and more!](https://huggingface.co/models?other=stable-diffusion&sort=likes) | ... |
