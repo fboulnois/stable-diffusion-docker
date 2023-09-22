@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.41.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.40.0...v1.41.0) - 2023-09-22
+
+### Added
+
+* Update diffusers to 0.21.2
+
 ## [v1.40.0](https://github.com/fboulnois/stable-diffusion-docker/compare/v1.39.0...v1.40.0) - 2023-08-23
 
 ### Added
