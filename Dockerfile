@@ -19,6 +19,11 @@ RUN mkdir -p /home/huggingface/.cache/huggingface \
   && mkdir -p /home/huggingface/input \
   && mkdir -p /home/huggingface/output
 
+VOLUME [ "/home/huggingface/.cache/huggingface" ]
+VOLUME [ "/home/huggingface/input" ]
+VOLUME [ "/home/huggingface/output" ]
+VOLUME [ "/tmp" ]
+
 COPY docker-entrypoint.py /usr/local/bin
 COPY token.txt /home/huggingface
 
