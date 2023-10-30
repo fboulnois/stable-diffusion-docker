@@ -15,6 +15,14 @@ set_gpu_arg() {
     GPU_ARG="--gpus=all"
 }
 
+check_token() {
+    [ -r ${PWD}/token.txt ] || {
+        echo "ERROR: no token found"
+        echo "you need to create a user access token in your Huggingface account. Save the user access token in a file called token.txt in current directory."
+        exit 1
+    }
+}
+
 build() {
     docker build . --tag "$CWD"
 }
@@ -24,10 +32,12 @@ clean() {
 }
 
 dev() {
+    check_token
     docker run --rm --gpus=all --entrypoint=sh \
         -v huggingface:/home/huggingface/.cache/huggingface \
         -v "$PWD"/input:/home/huggingface/input \
         -v "$PWD"/output:/home/huggingface/output \
+        -v "$PWD"/token.txt:/home/huggingface/token.txt \
         -it "$CWD"
 }
 
@@ -38,11 +48,13 @@ pull() {
 }
 
 run() {
+    check_token
     set_gpu_arg "$@"
     docker run --rm ${GPU_ARG} \
         -v huggingface:/home/huggingface/.cache/huggingface \
         -v "$PWD"/input:/home/huggingface/input \
         -v "$PWD"/output:/home/huggingface/output \
+        -v "$PWD"/token.txt:/home/huggingface/token.txt \
         "$CWD" "$@"
 }
 
