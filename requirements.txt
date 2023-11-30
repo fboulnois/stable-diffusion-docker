@@ -1,6 +1,6 @@
-diffusers[torch]==0.21.2
-onnxruntime==1.16.0
-safetensors==0.3.3
-torch==2.0.1+cu117
-transformers==4.33.2
-xformers==0.0.21
+diffusers[torch]==0.24.0
+onnxruntime==1.16.3
+safetensors==0.4.1
+torch==2.1.0+cu118
+transformers==4.35.2
+xformers==0.0.22.post7
