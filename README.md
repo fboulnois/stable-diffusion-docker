@@ -269,3 +269,9 @@ so these are not part of the official release.
 
 The images are saved as PNGs in the `output` folder using the prompt text. The
 `build.sh` script creates and mounts this folder as a volume in the container.
+
+## Contribution
+
+See the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details. In short,
+follow the style guidelines, agree to the Developer Certificate of Origin, and
+submit a PR.
