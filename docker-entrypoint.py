@@ -1,5 +1,11 @@
 #!/usr/bin/env python
-import argparse, datetime, inspect, os, re, warnings
+import argparse
+import datetime
+import inspect
+import os
+import re
+import warnings
+
 import numpy as np
 import torch
 from PIL import Image
@@ -290,6 +296,7 @@ def parse_args():
         args.prompt = args.prompt0
 
     return args
+
 
 def main():
     args = parse_args()
