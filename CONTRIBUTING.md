@@ -8,15 +8,15 @@ This project accepts community contributions. In order to contribute, please:
 
 ## Coding Style
 
-Please make sure to run [Black](https://black.readthedocs.io/en/stable/index.html)
-and [Flake8](https://flake8.pycqa.org/en/latest/) before submitting a PR.
+Please make sure to run [Ruff](https://github.com/astral-sh/ruff) before
+submitting a PR.
 
 ## Developer Certificate of Origin
 
 By contributing a PR to this project you agree to the [Developer Certificate of Origin (DCO)](https://developercertificate.org/).
 
-In short, you agree that you can make the contribution and that the project has
-the right to distribute your contribution under the terms of the project's
+This ensures that you can make the contribution and that the project has the
+right to distribute your contribution under the terms of the project's
 [LICENSE](LICENSE). The PR itself is a sign-off of your agreement to the DCO.
 
 ## Submission
