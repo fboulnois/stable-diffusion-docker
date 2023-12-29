@@ -167,6 +167,7 @@ original image (default `None`)
 * `--negative-prompt [NEGATIVE_PROMPT]`: the prompt to not render into an image
 (default `None`)
 * `--onnx`: use the onnx runtime for inference (default is off)
+* `--output [OUTPUT]`: the filename to output to (default is automatically generated)
 * `--skip`: skip safety checker (default is the safety checker is on)
 * `--strength [STRENGTH]`: diffusion strength to apply to the input image
 (default 0.75)
