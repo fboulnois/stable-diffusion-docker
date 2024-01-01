@@ -20,6 +20,5 @@ RUN mkdir -p /home/huggingface/.cache/huggingface \
   && mkdir -p /home/huggingface/output
 
 COPY docker-entrypoint.py /usr/local/bin
-COPY token.txt /home/huggingface
 
 ENTRYPOINT [ "docker-entrypoint.py" ]
